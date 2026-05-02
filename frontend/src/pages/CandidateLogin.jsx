@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { UserGroupIcon, ArrowLeftIcon } from '@heroicons/react/24/outline';
+import { authAPI } from '../services/api';
 
 export default function CandidateLogin() {
   const navigate = useNavigate();
@@ -27,14 +28,13 @@ export default function CandidateLogin() {
     setError('');
     
     try {
-      console.log('Calling API: api.users.login');
-      // TODO: Implement actual API call
-      const response = { success: true, data: { email, role: 'candidate' } };
+      console.log('Calling API: authAPI.login');
+      const response = await authAPI.login({ email, password }, 'candidate');
       console.log('API Response:', response);
       
-      if (response.success) {
+      if (response.access_token) {
         console.log('Login successful');
-        // onLoginSuccess(response.data);
+        localStorage.setItem('access_token', response.access_token);
         navigate('/dashboard/candidate');
       } else {
         console.log('Login failed:', response.message);
@@ -42,7 +42,7 @@ export default function CandidateLogin() {
       }
     } catch (error) {
       console.error('Login error:', error);
-      setError(error.message || 'Invalid email or password');
+      setError(error.response?.data?.detail || 'Invalid email or password');
     } finally {
       setLoading(false);
     }
@@ -74,10 +74,13 @@ export default function CandidateLogin() {
               ref={emailInput}
               type="email"
               placeholder="Enter your email"
-              placeholderTextColor="#B0C4DE"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              onSubmitEditing={() => passwordInput?.current?.focus()}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  passwordInput?.current?.focus();
+                }
+              }}
               className="w-full border border-gray-300 rounded-xl px-4 py-4 text-base bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               required
             />
@@ -92,10 +95,13 @@ export default function CandidateLogin() {
               ref={passwordInput}
               type="password"
               placeholder="Enter your password"
-              placeholderTextColor="#B0C4DE"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              onSubmitEditing={handleLogin}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  handleLogin(e);
+                }
+              }}
               className="w-full border border-gray-300 rounded-xl px-4 py-4 text-base bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               required
             />
@@ -104,7 +110,7 @@ export default function CandidateLogin() {
           {/* Error Message */}
           {error && (
             <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg">
-              {error}
+              {typeof error === 'string' ? error : 'An error occurred. Please try again.'}
             </div>
           )}
 

@@ -1,64 +1,59 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
+
+from auth import get_current_candidate_user
 from database import get_db
-from models import User, CandidateProfile
-from schemas import CandidateProfileCreate, CandidateProfileUpdate, CandidateProfileResponse
-from auth import get_current_active_user
+from models import CandidateProfile, User
+from schemas import (
+    CandidateProfileCreate,
+    CandidateProfileResponse,
+    CandidateProfileUpdate,
+)
 
 router = APIRouter()
+
+
+def ensure_candidate_profile(db: Session, user: User) -> CandidateProfile:
+    profile = db.query(CandidateProfile).filter(CandidateProfile.user_id == user.id).first()
+    if profile is None:
+        profile = CandidateProfile(user_id=user.id)
+        db.add(profile)
+        db.commit()
+        db.refresh(profile)
+    return profile
+
 
 @router.post("/profile", response_model=CandidateProfileResponse)
 def create_candidate_profile(
     profile: CandidateProfileCreate,
-    current_user: User = Depends(get_current_active_user),
-    db: Session = Depends(get_db)
+    current_user: User = Depends(get_current_candidate_user),
+    db: Session = Depends(get_db),
 ):
-    if current_user.role.value != "candidate":
-        raise HTTPException(status_code=403, detail="Only candidates can create candidate profiles")
-    
-    # Check if profile already exists
-    existing_profile = db.query(CandidateProfile).filter(CandidateProfile.user_id == current_user.id).first()
-    if existing_profile:
-        raise HTTPException(status_code=400, detail="Profile already exists")
-    
-    db_profile = CandidateProfile(user_id=current_user.id, **profile.dict())
-    db.add(db_profile)
+    db_profile = ensure_candidate_profile(db, current_user)
+    for field, value in profile.model_dump(exclude_unset=True).items():
+        setattr(db_profile, field, value)
     db.commit()
     db.refresh(db_profile)
-    
     return db_profile
+
 
 @router.get("/profile", response_model=CandidateProfileResponse)
 def get_candidate_profile(
-    current_user: User = Depends(get_current_active_user),
-    db: Session = Depends(get_db)
+    current_user: User = Depends(get_current_candidate_user),
+    db: Session = Depends(get_db),
 ):
-    if current_user.role.value != "candidate":
-        raise HTTPException(status_code=403, detail="Only candidates can view candidate profiles")
-    
-    profile = db.query(CandidateProfile).filter(CandidateProfile.user_id == current_user.id).first()
-    if not profile:
-        raise HTTPException(status_code=404, detail="Profile not found")
-    
-    return profile
+    return ensure_candidate_profile(db, current_user)
+
 
 @router.put("/profile", response_model=CandidateProfileResponse)
 def update_candidate_profile(
     profile_update: CandidateProfileUpdate,
-    current_user: User = Depends(get_current_active_user),
-    db: Session = Depends(get_db)
+    current_user: User = Depends(get_current_candidate_user),
+    db: Session = Depends(get_db),
 ):
-    if current_user.role.value != "candidate":
-        raise HTTPException(status_code=403, detail="Only candidates can update candidate profiles")
-    
-    profile = db.query(CandidateProfile).filter(CandidateProfile.user_id == current_user.id).first()
-    if not profile:
-        raise HTTPException(status_code=404, detail="Profile not found")
-    
-    for field, value in profile_update.dict(exclude_unset=True).items():
+    profile = ensure_candidate_profile(db, current_user)
+    for field, value in profile_update.model_dump(exclude_unset=True).items():
         setattr(profile, field, value)
-    
     db.commit()
     db.refresh(profile)
-    
     return profile

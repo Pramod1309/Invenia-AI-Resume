@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { UserGroupIcon, ArrowLeftIcon } from '@heroicons/react/24/outline';
+import { authAPI } from '../services/api';
 
 export default function CandidateSignUp() {
   const navigate = useNavigate();
@@ -42,12 +43,11 @@ export default function CandidateSignUp() {
     setError('');
     
     try {
-      console.log('Calling API: api.users.create');
-      // TODO: Implement actual API call
-      const response = { success: true, data: { name, email, role: 'candidate' } };
+      console.log('Calling API: authAPI.register');
+      const response = await authAPI.register({ name, email, password }, 'candidate');
       console.log('API Response:', response);
       
-      if (response.success) {
+      if (response.id) {
         console.log('Sign up successful');
         alert('Account created successfully!');
         navigate('/login/candidate');
@@ -57,7 +57,7 @@ export default function CandidateSignUp() {
       }
     } catch (error) {
       console.error('Sign up error:', error);
-      setError(error.message || 'Failed to create account');
+      setError(error.response?.data?.detail || error.message || 'Failed to create account');
     } finally {
       setLoading(false);
     }

@@ -5,6 +5,8 @@ import LoginSelector from './pages/LoginSelector';
 import CandidateLogin from './pages/CandidateLogin';
 import RecruiterLogin from './pages/RecruiterLogin';
 import CandidateSignUp from './pages/CandidateSignUp';
+import CandidateDashboard from './pages/CandidateDashboard';
+import RecruiterDashboard from './pages/RecruiterDashboard';
 
 function App() {
   const [showSplash, setShowSplash] = useState(true);
@@ -25,8 +27,8 @@ function App() {
             <Route path="/login/candidate" element={<CandidateLogin />} />
             <Route path="/login/recruiter" element={<RecruiterLogin />} />
             <Route path="/signup/candidate" element={<CandidateSignUp />} />
-            <Route path="/dashboard/candidate" element={<div>Candidate Dashboard</div>} />
-            <Route path="/dashboard/recruiter" element={<div>Recruiter Dashboard</div>} />
+            <Route path="/dashboard/candidate" element={<CandidateDashboard />} />
+            <Route path="/dashboard/recruiter" element={<RecruiterDashboard />} />
           </Routes>
         )}
       </div>
