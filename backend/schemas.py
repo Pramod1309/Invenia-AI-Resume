@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Optional
+from typing import Any, Optional
 
 from pydantic import BaseModel, ConfigDict, EmailStr, Field
 
@@ -48,6 +48,7 @@ class OAuthLogin(BaseModel):
 
 
 class CandidateProfileBase(BaseModel):
+    photo_url: Optional[str] = None
     phone: Optional[str] = None
     location: Optional[str] = None
     bio: Optional[str] = None
@@ -70,6 +71,7 @@ class CandidateProfileCreate(CandidateProfileBase):
 
 
 class CandidateProfileUpdate(BaseModel):
+    photo_url: Optional[str] = None
     phone: Optional[str] = None
     location: Optional[str] = None
     bio: Optional[str] = None
@@ -103,6 +105,7 @@ class RecruiterProfileBase(BaseModel):
     job_title: str
     phone: Optional[str] = None
     linkedin_url: Optional[str] = None
+    photo_url: Optional[str] = None
 
 
 class RecruiterProfileCreate(RecruiterProfileBase):
@@ -118,6 +121,7 @@ class RecruiterProfileUpdate(BaseModel):
     job_title: Optional[str] = None
     phone: Optional[str] = None
     linkedin_url: Optional[str] = None
+    photo_url: Optional[str] = None
 
 
 class RecruiterProfileResponse(RecruiterProfileBase, ORMModel):
@@ -156,8 +160,11 @@ class JobPostingBase(BaseModel):
     experience_level: Optional[str] = None
     salary_min: Optional[int] = None
     salary_max: Optional[int] = None
+    salary_currency: Optional[str] = None
+    salary_period: Optional[str] = None
     location: Optional[str] = None
     is_remote: bool = False
+    assessment_config: Optional[dict[str, Any]] = None
 
 
 class JobPostingCreate(JobPostingBase):
@@ -174,9 +181,12 @@ class JobPostingUpdate(BaseModel):
     experience_level: Optional[str] = None
     salary_min: Optional[int] = None
     salary_max: Optional[int] = None
+    salary_currency: Optional[str] = None
+    salary_period: Optional[str] = None
     location: Optional[str] = None
     is_remote: Optional[bool] = None
     is_active: Optional[bool] = None
+    assessment_config: Optional[dict[str, Any]] = None
 
 
 class JobPostingResponse(JobPostingBase, ORMModel):
@@ -198,6 +208,18 @@ class JobApplicationCreate(JobApplicationBase):
 
 class JobApplicationUpdate(BaseModel):
     status: Optional[str] = None
+
+
+class ApplicationWorkflowStageSubmit(BaseModel):
+    stage: str
+    skipped: Optional[bool] = None
+    answers: Optional[list[int]] = None
+    coding_answers: Optional[list[str]] = None
+    interview_answers: Optional[list[str]] = None
+    interview_answer: Optional[str] = None
+    interview_transcript: Optional[str] = None
+    interview_notes: Optional[str] = None
+    proctoring: Optional[dict[str, Any]] = None
 
 
 class JobApplicationResponse(JobApplicationBase, ORMModel):

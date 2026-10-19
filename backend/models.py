@@ -1,5 +1,5 @@
-from sqlalchemy import Column, Integer, String, Boolean, DateTime, ForeignKey, Text, Enum
-from sqlalchemy.orm import relationship
+from sqlalchemy import Column, Integer, String, Boolean, DateTime, ForeignKey, Text, Enum, LargeBinary
+from sqlalchemy.orm import deferred, relationship
 from sqlalchemy.sql import func
 from database import Base
 import enum
@@ -41,7 +41,13 @@ class CandidateProfile(Base):
     phone = Column(String)
     location = Column(String)
     bio = Column(Text)
+    photo_url = Column(String)
+    photo_content = deferred(Column(LargeBinary))
+    photo_mime_type = Column(String)
     resume_url = Column(String)
+    resume_name = Column(String)
+    resume_content = Column(LargeBinary)
+    resume_mime_type = Column(String)
     portfolio_url = Column(String)
     linkedin_url = Column(String)
     github_url = Column(String)
@@ -56,6 +62,10 @@ class CandidateProfile(Base):
     preferred_job_types = Column(Text)  # JSON string
     preferred_locations = Column(Text)  # JSON string
     salary_expectation = Column(String)
+    ats_score = Column(Integer)
+    ats_summary = Column(Text)
+    ats_breakdown = Column(Text)  # JSON string
+    ats_last_checked_at = Column(DateTime(timezone=True))
     
     # Status
     is_available = Column(Boolean, default=True)
@@ -83,6 +93,9 @@ class RecruiterProfile(Base):
     job_title = Column(String, nullable=False)
     phone = Column(String)
     linkedin_url = Column(String)
+    photo_url = Column(String)
+    photo_content = deferred(Column(LargeBinary))
+    photo_mime_type = Column(String)
     
     # Verification
     is_company_verified = Column(Boolean, default=False)
@@ -111,8 +124,12 @@ class JobPosting(Base):
     experience_level = Column(String)  # Entry, Mid, Senior, etc.
     salary_min = Column(Integer)
     salary_max = Column(Integer)
+    salary_currency = Column(String)
+    salary_period = Column(String)
     location = Column(String)
     is_remote = Column(Boolean, default=False)
+    assessment_config = Column(Text)  # JSON string
+    view_count = Column(Integer, default=0)
     
     # Status
     is_active = Column(Boolean, default=True)
@@ -133,6 +150,23 @@ class JobApplication(Base):
     # Application details
     cover_letter = Column(Text)
     resume_url = Column(String)
+    resume_name = Column(String)
+    resume_content = Column(LargeBinary)
+    resume_mime_type = Column(String)
+    job_match_score = Column(Integer)
+    workflow_stage = Column(String, default="profile")
+    workflow_state = Column(Text)  # JSON string
+    final_score = Column(Integer)
+    interview_transcript = Column(Text)
+    interview_turns = Column(Text)
+    interview_report = Column(Text)
+    interview_recorded_at = Column(DateTime(timezone=True))
+    interview_recording_content = Column(LargeBinary)
+    interview_recording_name = Column(String)
+    interview_recording_mime_type = Column(String)
+    interview_snapshot_content = Column(LargeBinary)
+    interview_snapshot_name = Column(String)
+    interview_snapshot_mime_type = Column(String)
     
     # Status
     status = Column(String, default="pending")  # pending, reviewed, shortlisted, rejected, hired

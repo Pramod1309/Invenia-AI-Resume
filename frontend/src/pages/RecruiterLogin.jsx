@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { BriefcaseIcon, ArrowLeftIcon } from '@heroicons/react/24/outline';
+import { ArrowLeftIcon, EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 import { authAPI } from '../services/api';
 
 export default function RecruiterLogin() {
@@ -9,39 +9,31 @@ export default function RecruiterLogin() {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [showRecoveryHelp, setShowRecoveryHelp] = useState(false);
   const passwordInput = useRef(null);
   const emailInput = useRef(null);
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    console.log('Login button clicked');
-    console.log('Form data:', { email, password });
-    
     if (!email.trim() || !password.trim()) {
-      console.log('Validation failed: Missing fields');
       setError('Please fill in all fields');
       return;
     }
 
-    console.log('Validation passed, starting API call');
     setLoading(true);
     setError('');
     
     try {
-      console.log('Calling API: authAPI.login');
       const response = await authAPI.login({ email, password }, 'recruiter');
-      console.log('API Response:', response);
       
       if (response.access_token) {
-        console.log('Login successful');
         localStorage.setItem('access_token', response.access_token);
         navigate('/dashboard/recruiter');
       } else {
-        console.log('Login failed:', response.message);
         setError(response.message || 'Invalid email or password');
       }
     } catch (error) {
-      console.error('Login error:', error);
       setError(error.response?.data?.detail || 'Invalid email or password');
     } finally {
       setLoading(false);
@@ -59,7 +51,8 @@ export default function RecruiterLogin() {
           <ArrowLeftIcon className="h-5 w-5 inline mr-2" />
           Back
         </button>
-        <h1 className="text-3xl font-bold text-white text-center">Login</h1>
+        <p className="text-center text-sm font-semibold uppercase tracking-[0.2em] text-blue-200">Recruiter workspace</p>
+        <h1 className="mt-2 text-3xl font-bold text-white text-center">Welcome back</h1>
       </div>
 
       {/* Form */}
@@ -91,20 +84,15 @@ export default function RecruiterLogin() {
             <label className="block text-base font-semibold text-gray-800 mb-2">
               Password
             </label>
-            <input
+            <div className="relative"><input
               ref={passwordInput}
-              type="password"
+              type={showPassword ? 'text' : 'password'}
               placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                  handleLogin(e);
-                }
-              }}
-              className="w-full border border-gray-300 rounded-xl px-4 py-4 text-base bg-gray-50 focus:outline-none focus:ring-2 focus:ring-navy-blue-500 focus:border-transparent"
+              className="w-full border border-gray-300 rounded-xl px-4 py-4 pr-12 text-base bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               required
-            />
+            /><button type="button" onClick={() => setShowPassword((value) => !value)} aria-label={showPassword ? 'Hide password' : 'Show password'} className="absolute right-3 top-1/2 -translate-y-1/2 rounded-lg p-2 text-slate-500 hover:bg-slate-100">{showPassword ? <EyeSlashIcon className="h-5 w-5" /> : <EyeIcon className="h-5 w-5" />}</button></div>
           </div>
 
           {/* Error Message */}
@@ -118,10 +106,12 @@ export default function RecruiterLogin() {
           <div className="text-center mb-8">
             <button
               type="button"
+              onClick={() => setShowRecoveryHelp((value) => !value)}
               className="text-gray-800 text-sm font-medium hover:text-gray-600"
             >
               Forgot Password?
             </button>
+            {showRecoveryHelp && <p className="mt-3 rounded-xl bg-blue-50 p-3 text-xs leading-5 text-blue-800">Password reset is managed by your organisation administrator. Contact them using your registered work email.</p>}
           </div>
 
           {/* Login Button */}

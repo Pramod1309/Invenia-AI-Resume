@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Invenia AI Recruiter Manual</title>
+    <link rel="stylesheet" href="./assets/styles.css" />
+    <script defer src="./assets/app.js"></script>
+  </head>
+  <body data-page="recruiter">
+    <div class="docs-shell">
+      <header class="topbar">
+        <div class="brand">
+          <div class="brand-mark">IA</div>
+          <div class="brand-copy">
+            <strong>Recruiter Manual</strong>
+            <span>Job setup, candidate review, and report analysis</span>
+          </div>
+        </div>
+        <nav class="nav" aria-label="Documentation navigation">
+          <a href="./index.html">Overview</a>
+          <a href="./candidate-manual.html">Candidate Manual</a>
+          <a href="./recruiter-manual.html">Recruiter Manual</a>
+          <a href="./diagrams.html">Diagrams</a>
+          <a href="./system-guide.html">System Guide</a>
+        </nav>
+        <div class="toolbar">
+          <a class="btn btn-secondary doc-link" data-open-live href="#">Open Live App</a>
+          <button class="btn btn-primary" data-print>Download PDF</button>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero">
+          <div class="hero-grid">
+            <div>
+              <span class="eyebrow">Recruiter flow</span>
+              <h1>Post jobs, configure screening, and review AI reports.</h1>
+              <p>
+                The recruiter portal controls the hiring pipeline. In the current build, aptitude, technical, and coding can be
+                required or optional, while the AI interview stays compulsory and produces a report for later review.
+              </p>
+              <div class="tag-row">
+                <span class="tag">Create job</span>
+                <span class="tag">AI generated questions</span>
+                <span class="tag">Candidate review</span>
+                <span class="tag">Interview scheduling</span>
+              </div>
+              <div class="hero-quote">
+                <strong>Live app:</strong>
+                <a class="doc-link" href="https://frontend-production-a792.up.railway.app/" target="_blank" rel="noreferrer">
+                  https://frontend-production-a792.up.railway.app/
+                </a>
+                <div class="mini-note" style="margin-top: 10px;">
+                  These screenshots are from the current production flow and include real candidate data and AI report output.
+                </div>
+              </div>
+            </div>
+
+            <div class="hero-panel">
+              <div class="stat-grid">
+                <article class="stat-card">
+                  <div class="kicker">Jobs</div>
+                  <div class="value" data-count="1">1</div>
+                  <div class="sub">Current live job seed used for the screenshots.</div>
+                </article>
+                <article class="stat-card">
+                  <div class="kicker">Candidates</div>
+                  <div class="value" data-count="2">2</div>
+                  <div class="sub">Visible in the recruiter pipeline today.</div>
+                </article>
+                <article class="stat-card">
+                  <div class="kicker">Screens</div>
+                  <div class="value" data-count="5">5</div>
+                  <div class="sub">Role selector, login, job setup, pipeline, report.</div>
+                </article>
+                <article class="stat-card">
+                  <div class="kicker">AI report</div>
+                  <div class="value" data-count="75">75%</div>
+                  <div class="sub">Completed interview summary in the current dataset.</div>
+                </article>
+              </div>
+
+              <div class="notice">
+                Recruiters should create the job card first, then decide which screening stages are compulsory or optional.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <p class="section-kicker">At a glance</p>
+              <h2>What the recruiter can control</h2>
+            </div>
+            <p>The portal is built to define the screening flow before candidates ever start.</p>
+          </div>
+
+          <div class="grid-4">
+            <article class="card light">
+              <span class="step-chip" style="background: linear-gradient(135deg, var(--violet), var(--blue));">J1</span>
+              <h3 class="step-title">Job details</h3>
+              <p class="step-copy">Title, description, skills, salary, location, type, and benefits.</p>
+            </article>
+            <article class="card light">
+              <span class="step-chip" style="background: linear-gradient(135deg, var(--amber), #ef4444);">S1</span>
+              <h3 class="step-title">Optional rounds</h3>
+              <p class="step-copy">Aptitude, technical, and coding can be marked compulsory or optional.</p>
+            </article>
+            <article class="card light">
+              <span class="step-chip" style="background: linear-gradient(135deg, var(--green), var(--cyan));">A1</span>
+              <h3 class="step-title">AI generation</h3>
+              <p class="step-copy">Gemini creates unique questions from the job description and skills.</p>
+            </article>
+            <article class="card light">
+              <span class="step-chip" style="background: linear-gradient(135deg, var(--rose), var(--violet));">R1</span>
+              <h3 class="step-title">Final review</h3>
+              <p class="step-copy">Candidates reach the interview report and analytics for recruiter review.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section step-grid">
+          <div class="section-head">
+            <div>
+              <p class="section-kicker">Step 1</p>
+              <h2>Choose Recruiter on the role selector and sign in</h2>
+            </div>
+            <p>Recruiter login keeps the workflows separate from the candidate portal.</p>
+          </div>
+
+          <div class="step">
+            <article class="card">
+              <span class="status-pill done">Access</span>
+              <h3 class="step-title">What to do</h3>
+              <p class="step-copy">
+                Open the live app, choose the Recruiter card, and log in with recruiter credentials. The current production setup
+                uses the super recruiter account for admin-level access.
+              </p>
+              <div class="callout" style="margin-top: 16px;">
+                <strong>Tip:</strong> If the recruiter portal says the account is inactive, verify the login email and confirm that the
+                user has recruiter permissions in the backend.
+              </div>
+            </article>
+
+            <figure class="figure">
+              <img src="./assets/screenshots/recruiter-login.png" alt="Recruiter login screen" />
+              <figcaption>
+                <strong>Recruiter login</strong>
+                The login form is the same structure as the candidate portal, but routes the user into the recruiter dashboard.
+              </figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section class="section step-grid">
+          <div class="section-head">
+            <div>
+              <p class="section-kicker">Step 2</p>
+              <h2>Use the dashboard to see jobs, candidates, and metrics</h2>
+            </div>
+            <p>The jobs tab and candidates tab are the key operational views.</p>
+          </div>
+
+          <div class="step reverse">
+            <figure class="figure">
+              <img src="./assets/screenshots/recruiter-jobs.png" alt="Recruiter jobs dashboard" />
+              <figcaption>
+                <strong>Jobs view</strong>
+                The live recruiter dashboard shows the current job card, application counts, and the job match score.
+              </figcaption>
+            </figure>
+
+            <article class="card">
+              <span class="status-pill partial">Overview</span>
+              <h3 class="step-title">What to look at first</h3>
+              <p class="step-copy">
+                Start with the active jobs list. It gives a quick snapshot of title, location, salary range, applicant count, and the
+                matching analysis. From here, recruiters can open the create job modal or edit an existing job.
+              </p>
+              <ul class="check-list" style="margin-top: 16px;">
+                <li>Review the active job card before changing screening settings.</li>
+                <li>Check whether the job has ongoing applicants.</li>
+                <li>Use the candidates tab when you want to inspect the pipeline.</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="section step-grid">
+          <div class="section-head">
+            <div>
+              <p class="section-kicker">Step 3</p>
+              <h2>Create a job and choose the screening rules</h2>
+            </div>
+            <p>This is where the recruiter decides what is compulsory and what can be optional.</p>
+          </div>
+
+          <div class="step">
+            <article class="card">
+              <span class="status-pill done">Configuration</span>
+              <h3 class="step-title">What the modal supports</h3>
+              <p class="step-copy">
+                The create job modal lets the recruiter enter job details and then configure aptitude, technical, coding, and interview
+                stages. Aptitude, technical, and coding can be optional or compulsory. The AI interview remains compulsory.
+              </p>
+              <div class="callout" style="margin-top: 16px;">
+                <strong>Important:</strong> Gemini generates 5 aptitude questions, 5 technical MCQs, 2 coding prompts, and a
+                3-question voice interview for each job session.
+              </div>
+            </article>
+
+            <figure class="figure">
+              <img src="./assets/screenshots/recruiter-job-modal.png" alt="Create job modal with assessment configuration" />
+              <figcaption>
+                <strong>Create Job modal</strong>
+                The job form includes required/optional toggles and AI/manual question settings for each screening stage.
+              </figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="grid-2">
+            <article class="chart-card">
+              <div class="section-head" style="margin-bottom: 18px;">
+                <div>
+                  <p class="section-kicker">Assessment controls</p>
+                  <h2 style="font-size: 1.35rem;">How the recruiter toggles the flow</h2>
+                </div>
+                <p>These are the controls that shape the candidate journey.</p>
+              </div>
+              <div class="meter-wrap">
+                <div class="meter-label"><span>Aptitude can be optional or compulsory</span><span>100%</span></div>
+                <div class="meter"><span data-meter="100"></span></div>
+                <div class="meter-label"><span>Technical can be optional or compulsory</span><span>100%</span></div>
+                <div class="meter"><span data-meter="100"></span></div>
+                <div class="meter-label"><span>Coding can be optional or compulsory</span><span>100%</span></div>
+                <div class="meter"><span data-meter="100"></span></div>
+                <div class="meter-label"><span>AI interview is always compulsory</span><span>100%</span></div>
+                <div class="meter"><span data-meter="100"></span></div>
+              </div>
+            </article>
+
+            <article class="card light">
+              <span class="status-pill done">Rules summary</span>
+              <h3 class="step-title">How recruiters should think about the form</h3>
+              <ul class="bullet-list" style="margin-top: 12px;">
+                <li>Mark a round optional when the role does not need it.</li>
+                <li>Keep the interview compulsory so the voice interview always runs.</li>
+                <li>Use AI-generated questions to keep each session different.</li>
+                <li>Leave manual text fields blank if you want Gemini to complete the set.</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="section step-grid">
+          <div class="section-head">
+            <div>
+              <p class="section-kicker">Step 4</p>
+              <h2>Review candidates and open the AI interview report</h2>
+            </div>
+            <p>The candidates tab shows pipeline information and report details when available.</p>
+          </div>
+
+          <div class="step reverse">
+            <figure class="figure">
+              <img src="./assets/screenshots/recruiter-candidate-report.png" alt="Recruiter candidate report view" />
+              <figcaption>
+                <strong>Candidate report</strong>
+                The recruiter can review the final interview score, strengths, gaps, and recommendations in one panel.
+              </figcaption>
+            </figure>
+
+            <article class="card">
+              <span class="status-pill done">Report review</span>
+              <h3 class="step-title">What the recruiter sees</h3>
+              <p class="step-copy">
+                When the candidate finishes the interview, the report becomes visible in the candidate detail panel. It contains the
+                score, question analysis, strengths, gaps, and recommendations.
+              </p>
+              <ul class="check-list" style="margin-top: 16px;">
+                <li>Use the report to decide whether to move the candidate forward.</li>
+                <li>Check the proctoring summary for interview warnings.</li>
+                <li>Use the status dropdown to update the pipeline stage.</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <p class="section-kicker">Recruiter checklist</p>
+              <h2>What to verify before publishing a job</h2>
+            </div>
+            <p>This keeps the screening flow consistent for every applicant.</p>
+          </div>
+
+          <div class="grid-3">
+            <article class="card">
+              <h3>Before publish</h3>
+              <ul class="bullet-list" style="margin-top: 12px;">
+                <li>Job description is complete and specific.</li>
+                <li>Salary range is entered without the currency symbol.</li>
+                <li>Required skills and location are accurate.</li>
+              </ul>
+            </article>
+            <article class="card">
+              <h3>Before review</h3>
+              <ul class="bullet-list" style="margin-top: 12px;">
+                <li>Assessment toggles reflect the real hiring need.</li>
+                <li>Aptitude, technical, and coding counts are set to 5, 5, and 2.</li>
+                <li>The interview duration is suitable for the role.</li>
+              </ul>
+            </article>
+            <article class="card">
+              <h3>Before decision</h3>
+              <ul class="bullet-list" style="margin-top: 12px;">
+                <li>Read the AI report before moving the candidate.</li>
+                <li>Review report strengths and gaps, not just the final score.</li>
+                <li>Use the analytics tab to see how the funnel is performing.</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <footer class="page-footer">
+          <div>Recruiter manual for Invenia AI.</div>
+          <div>Use PDF export for stakeholder handoffs.</div>
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>

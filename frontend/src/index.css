@@ -1,3 +1,75 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  font-family: "Aptos", "Segoe UI Variable", "Segoe UI", sans-serif;
+  color: #0f172a;
+  background: #f8fafc;
+  font-synthesis: none;
+}
+
+html { scroll-behavior: smooth; }
+body { min-width: 320px; margin: 0; }
+button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus-visible {
+  outline: 3px solid rgba(37, 99, 235, 0.45);
+  outline-offset: 2px;
+}
+.scrollbar-hidden { scrollbar-width: none; }
+.scrollbar-hidden::-webkit-scrollbar { display: none; }
+.safe-bottom { padding-bottom: max(1rem, env(safe-area-inset-bottom)); }
+
+.invenia-loader-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 2rem;
+  background:
+    radial-gradient(circle at 18% 20%, rgba(14, 165, 233, 0.16), transparent 30%),
+    radial-gradient(circle at 82% 78%, rgba(37, 99, 235, 0.14), transparent 34%),
+    linear-gradient(145deg, #f8fbff 0%, #eef6ff 48%, #ffffff 100%);
+  color: #071b3b;
+}
+.invenia-loader-orbit { position: relative; width: 148px; height: 148px; animation: invenia-float 2.2s ease-in-out infinite; }
+.invenia-loader-mascot {
+  position: absolute; inset: 18px; border: 3px solid #173d75; border-radius: 38px;
+  background: linear-gradient(145deg, #ffffff, #dbeafe); box-shadow: 0 24px 55px rgba(23, 61, 117, 0.2);
+}
+.invenia-loader-ear { position: absolute; top: -12px; width: 26px; height: 28px; border: 3px solid #173d75; border-bottom: 0; background: #bfdbfe; }
+.invenia-loader-ear-left { left: 18px; border-radius: 16px 16px 0 4px; transform: rotate(-12deg); }
+.invenia-loader-ear-right { right: 18px; border-radius: 16px 16px 4px 0; transform: rotate(12deg); }
+.invenia-loader-eye { position: absolute; top: 34px; width: 10px; height: 14px; border-radius: 999px; background: #071b3b; animation: invenia-blink 3s infinite; }
+.invenia-loader-eye-left { left: 33px; } .invenia-loader-eye-right { right: 33px; }
+.invenia-loader-smile { position: absolute; top: 56px; left: 50%; width: 28px; height: 14px; transform: translateX(-50%); border-bottom: 3px solid #2563eb; border-radius: 0 0 30px 30px; }
+.invenia-loader-page { position: absolute; left: 25px; right: 25px; bottom: -16px; height: 46px; padding: 10px; border: 2px solid #93c5fd; border-radius: 12px; background: white; box-shadow: 0 10px 24px rgba(37,99,235,.15); animation: invenia-page 1.5s ease-in-out infinite; }
+.invenia-loader-page i { display: block; height: 3px; margin-bottom: 5px; border-radius: 999px; background: #bfdbfe; }
+.invenia-loader-page i:nth-child(2) { width: 72%; background: #60a5fa; }
+.invenia-loader-dot { position: absolute; width: 12px; height: 12px; border-radius: 50%; background: #0ea5e9; box-shadow: 0 0 0 7px rgba(14,165,233,.1); }
+.invenia-loader-dot-one { left: 2px; top: 42px; animation: invenia-pulse 1.4s .1s infinite; }
+.invenia-loader-dot-two { right: 2px; top: 30px; background: #2563eb; animation: invenia-pulse 1.4s .35s infinite; }
+.invenia-loader-dot-three { right: 16px; bottom: 8px; background: #06b6d4; animation: invenia-pulse 1.4s .6s infinite; }
+.invenia-loader-brand { margin: 1.6rem 0 0; color: #2563eb; font-size: .72rem; font-weight: 800; letter-spacing: .28em; }
+.invenia-loader-title { margin: .45rem 0 0; font-size: clamp(1.3rem, 4vw, 2rem); font-weight: 750; text-align: center; }
+.invenia-loader-copy { margin: .6rem 0 0; color: #64748b; font-size: .9rem; text-align: center; }
+.invenia-loader-track { width: min(260px, 72vw); height: 5px; margin-top: 1.4rem; overflow: hidden; border-radius: 999px; background: #dbeafe; }
+.invenia-loader-track span { display: block; width: 45%; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #2563eb, #06b6d4); animation: invenia-track 1.25s ease-in-out infinite; }
+.invenia-network-mascot { position: relative; display: inline-block; width: 34px; height: 34px; border: 2px solid #2563eb; border-radius: 12px; background: #dbeafe; animation: invenia-float 1.5s ease-in-out infinite; }
+.invenia-network-mascot i { position: absolute; top: 10px; width: 5px; height: 7px; border-radius: 50%; background: #0f172a; }
+.invenia-network-mascot i:first-child { left: 8px; } .invenia-network-mascot i:last-child { right: 8px; }
+@keyframes invenia-float { 0%,100% { transform: translateY(0) rotate(-1deg); } 50% { transform: translateY(-8px) rotate(1deg); } }
+@keyframes invenia-blink { 0%,44%,52%,100% { transform: scaleY(1); } 48% { transform: scaleY(.1); } }
+@keyframes invenia-page { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+@keyframes invenia-pulse { 0%,100% { transform: scale(.65); opacity: .45; } 50% { transform: scale(1); opacity: 1; } }
+@keyframes invenia-track { 0% { transform: translateX(-105%); } 100% { transform: translateX(225%); } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

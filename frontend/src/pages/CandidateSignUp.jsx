@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { UserGroupIcon, ArrowLeftIcon } from '@heroicons/react/24/outline';
+import { ArrowLeftIcon, EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 import { authAPI } from '../services/api';
 
 export default function CandidateSignUp() {
@@ -11,52 +11,40 @@ export default function CandidateSignUp() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const passwordInput = useRef(null);
   const confirmPasswordInput = useRef(null);
   const emailInput = useRef(null);
 
   const handleSignUp = async (e) => {
     e.preventDefault();
-    console.log('Sign up button clicked');
-    console.log('Form data:', { name, email, password, confirmPassword });
-    
     if (!name.trim() || !email.trim() || !password.trim() || !confirmPassword.trim()) {
-      console.log('Validation failed: Missing fields');
       setError('Please fill in all fields');
       return;
     }
 
     if (password !== confirmPassword) {
-      console.log('Validation failed: Passwords do not match');
       setError('Passwords do not match');
       return;
     }
 
     if (password.length < 6) {
-      console.log('Validation failed: Password too short');
       setError('Password must be at least 6 characters');
       return;
     }
 
-    console.log('Validation passed, starting API call');
     setLoading(true);
     setError('');
     
     try {
-      console.log('Calling API: authAPI.register');
       const response = await authAPI.register({ name, email, password }, 'candidate');
-      console.log('API Response:', response);
       
       if (response.id) {
-        console.log('Sign up successful');
-        alert('Account created successfully!');
-        navigate('/login/candidate');
+        navigate('/login/candidate', { state: { accountCreated: true } });
       } else {
-        console.log('Sign up failed:', response.message);
         setError(response.message || 'Failed to create account');
       }
     } catch (error) {
-      console.error('Sign up error:', error);
       setError(error.response?.data?.detail || error.message || 'Failed to create account');
     } finally {
       setLoading(false);
@@ -120,17 +108,18 @@ export default function CandidateSignUp() {
             <label className="block text-base font-semibold text-gray-800 mb-2">
               Password
             </label>
-            <input
+            <div className="relative"><input
               ref={passwordInput}
-              type="password"
+              type={showPassword ? 'text' : 'password'}
               placeholder="Enter your password"
               placeholderTextColor="#B0C4DE"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               onSubmitEditing={() => confirmPasswordInput?.current?.focus()}
-              className="w-full border border-gray-300 rounded-xl px-4 py-4 text-base bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full border border-gray-300 rounded-xl px-4 py-4 pr-12 text-base bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               required
-            />
+            /><button type="button" onClick={() => setShowPassword((value) => !value)} aria-label={showPassword ? 'Hide passwords' : 'Show passwords'} className="absolute right-3 top-1/2 -translate-y-1/2 rounded-lg p-2 text-slate-500 hover:bg-slate-100">{showPassword ? <EyeSlashIcon className="h-5 w-5" /> : <EyeIcon className="h-5 w-5" />}</button></div>
+            <p className="mt-2 text-xs text-slate-500">Use at least 6 characters. A longer unique password is recommended.</p>
           </div>
 
           {/* Confirm Password Input */}
@@ -140,7 +129,7 @@ export default function CandidateSignUp() {
             </label>
             <input
               ref={confirmPasswordInput}
-              type="password"
+              type={showPassword ? 'text' : 'password'}
               placeholder="Confirm your password"
               placeholderTextColor="#B0C4DE"
               value={confirmPassword}

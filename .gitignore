@@ -1,0 +1,19 @@
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/.env
+frontend/.env.*
+backend/venv/
+backend/__pycache__/
+backend/uploads/
+backend/*.db
+*.log
+.cache/
+
+# Runtime and local-only files
+**/__pycache__/
+*.py[cod]
+*.db
+.env
+**/.env
+is improvements*

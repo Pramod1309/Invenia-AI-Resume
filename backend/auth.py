@@ -107,7 +107,10 @@ async def get_current_super_recruiter(current_user: User = Depends(get_current_r
     return current_user
 
 # OAuth Configuration
-GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID")
+GOOGLE_CLIENT_ID = os.getenv(
+    "GOOGLE_CLIENT_ID",
+    "130212797010-1537g33b5i3qjb3jru5v9c40qhod083c.apps.googleusercontent.com",
+)
 GOOGLE_CLIENT_SECRET = os.getenv("GOOGLE_CLIENT_SECRET")
 GITHUB_CLIENT_ID = os.getenv("GITHUB_CLIENT_ID")
 GITHUB_CLIENT_SECRET = os.getenv("GITHUB_CLIENT_SECRET")

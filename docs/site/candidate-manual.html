@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Invenia AI Candidate Manual</title>
+    <link rel="stylesheet" href="./assets/styles.css" />
+    <script defer src="./assets/app.js"></script>
+  </head>
+  <body data-page="candidate">
+    <div class="docs-shell">
+      <header class="topbar">
+        <div class="brand">
+          <div class="brand-mark">IA</div>
+          <div class="brand-copy">
+            <strong>Candidate Manual</strong>
+            <span>Login to final report, with real screenshots</span>
+          </div>
+        </div>
+        <nav class="nav" aria-label="Documentation navigation">
+          <a href="./index.html">Overview</a>
+          <a href="./candidate-manual.html">Candidate Manual</a>
+          <a href="./recruiter-manual.html">Recruiter Manual</a>
+          <a href="./diagrams.html">Diagrams</a>
+          <a href="./system-guide.html">System Guide</a>
+        </nav>
+        <div class="toolbar">
+          <a class="btn btn-secondary doc-link" data-open-live href="#">Open Live App</a>
+          <button class="btn btn-primary" data-print>Download PDF</button>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero">
+          <div class="hero-grid">
+            <div>
+              <span class="eyebrow">Candidate flow</span>
+              <h1>From first login to ATS score and interview report.</h1>
+              <p>
+                This guide follows the candidate journey exactly as it exists in the current build. It starts at the role selector,
+                moves through sign in, profile creation, resume upload, ATS scan, job application, and ends with the interview
+                summary.
+              </p>
+              <div class="tag-row">
+                <span class="tag">Resume upload</span>
+                <span class="tag">Real ATS score</span>
+                <span class="tag">Application workflow</span>
+                <span class="tag">Three-question AI interview</span>
+              </div>
+              <div class="hero-quote">
+                <strong>Live app:</strong>
+                <a class="doc-link" href="https://frontend-production-a792.up.railway.app/" target="_blank" rel="noreferrer">
+                  https://frontend-production-a792.up.railway.app/
+                </a>
+                <div class="mini-note" style="margin-top: 10px;">
+                  The screenshots below are taken from the live production build connected to the working backend.
+                </div>
+              </div>
+            </div>
+
+            <div class="hero-panel">
+              <div class="stat-grid">
+                <article class="stat-card">
+                  <div class="kicker">Stages</div>
+                  <div class="value" data-count="6">6</div>
+                  <div class="sub">Role selector to completed report.</div>
+                </article>
+                <article class="stat-card">
+                  <div class="kicker">ATS score</div>
+                  <div class="value" data-count="55">55%</div>
+                  <div class="sub">Live resume scan result shown in the profile panel.</div>
+                </article>
+                <article class="stat-card">
+                  <div class="kicker">MCQs</div>
+                  <div class="value" data-count="10">10</div>
+                  <div class="sub">Five aptitude and five technical questions per job.</div>
+                </article>
+                <article class="stat-card">
+                  <div class="kicker">Interview</div>
+                  <div class="value" data-count="3">3</div>
+                  <div class="sub">AI voice interview with live camera and transcript.</div>
+                </article>
+              </div>
+
+              <div class="notice">
+                The candidate guide is optimized for print. If you need a PDF, click <strong>Download PDF</strong> or use the
+                browser print dialog.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <p class="section-kicker">Quick start</p>
+              <h2>The candidate workflow at a glance</h2>
+            </div>
+            <p>Use this path when onboarding a new candidate or training support staff.</p>
+          </div>
+
+          <div class="grid-4">
+            <article class="card light">
+              <span class="step-chip">01</span>
+              <h3 class="step-title">Choose the Candidate path</h3>
+              <p class="step-copy">Open the app, pick the Candidate card, and move to the login page.</p>
+            </article>
+            <article class="card light">
+              <span class="step-chip">02</span>
+              <h3 class="step-title">Complete your profile</h3>
+              <p class="step-copy">Add personal details, skills, links, and a professional summary.</p>
+            </article>
+            <article class="card light">
+              <span class="step-chip">03</span>
+              <h3 class="step-title">Upload and scan resume</h3>
+              <p class="step-copy">The ATS scan updates automatically and writes a score back to the profile.</p>
+            </article>
+            <article class="card light">
+              <span class="step-chip">04</span>
+              <h3 class="step-title">Apply and interview</h3>
+              <p class="step-copy">Optional screening rounds can be skipped, but the AI interview is compulsory.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section step-grid">
+          <div class="section-head">
+            <div>
+              <p class="section-kicker">Step 1</p>
+              <h2>Open the role selector and choose Candidate</h2>
+            </div>
+            <p>The first screen asks the user to choose the correct portal.</p>
+          </div>
+
+          <div class="step">
+            <article class="card">
+              <span class="status-pill done">Start here</span>
+              <h3 class="step-title">What to do</h3>
+              <p class="step-copy">
+                Navigate to the live URL, wait for the splash screen, and select the Candidate card. This keeps the login path
+                separate from the Recruiter portal and avoids confusion later in the journey.
+              </p>
+              <ul class="check-list" style="margin-top: 16px;">
+                <li>Use the Candidate card when applying for jobs.</li>
+                <li>Use the Recruiter card only if you need to post or review jobs.</li>
+                <li>The selector page is also a good checkpoint for troubleshooting access problems.</li>
+              </ul>
+            </article>
+
+            <figure class="figure">
+              <img src="./assets/screenshots/login-selector.png" alt="Invenia AI role selector screen" />
+              <figcaption>
+                <strong>Role selector</strong>
+                This is the live landing screen. The Candidate and Recruiter cards route users to different portals.
+              </figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section class="section step-grid">
+          <div class="section-head">
+            <div>
+              <p class="section-kicker">Step 2</p>
+              <h2>Sign in, or create a new candidate account</h2>
+            </div>
+            <p>The login page keeps email and password only, so onboarding stays quick.</p>
+          </div>
+
+          <div class="step reverse">
+            <figure class="figure">
+              <img src="./assets/screenshots/candidate-login.png" alt="Candidate login screen" />
+              <figcaption>
+                <strong>Candidate login</strong>
+                The form accepts the candidate email and password, then routes the user into the dashboard.
+              </figcaption>
+            </figure>
+
+            <article class="card">
+              <span class="status-pill partial">Onboarding</span>
+              <h3 class="step-title">What to fill in</h3>
+              <p class="step-copy">
+                New users can sign up from this page. Existing users should enter the email and password they used during
+                registration. After login, the system stores the token and opens the candidate dashboard.
+              </p>
+              <div class="callout" style="margin-top: 16px;">
+                <strong>Tip:</strong> If login fails, confirm that you chose the Candidate login path. The backend checks the user
+                role as part of authentication.
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="section step-grid">
+          <div class="section-head">
+            <div>
+              <p class="section-kicker">Step 3</p>
+              <h2>Complete the profile and upload a resume</h2>
+            </div>
+            <p>The dashboard refreshes profile completion and ATS information after upload.</p>
+          </div>
+
+          <div class="step">
+            <article class="card">
+              <span class="status-pill done">Profile</span>
+              <h3 class="step-title">Profile setup</h3>
+              <p class="step-copy">
+                Add your name, current title, location, experience, skills, job preferences, and links. The profile view also shows
+                the resume upload button and the live ATS scan area.
+              </p>
+              <ul class="check-list" style="margin-top: 16px;">
+                <li>Keep the summary short and role-specific.</li>
+                <li>Use skills that match the jobs you want to apply for.</li>
+                <li>Upload a PDF, DOC, or DOCX resume before running ATS.</li>
+              </ul>
+            </article>
+
+            <figure class="figure">
+              <img src="./assets/screenshots/candidate-profile.png" alt="Candidate profile and ATS dashboard" />
+              <figcaption>
+                <strong>Profile + ATS</strong>
+                The live profile view shows resume status, ATS score, strengths, keyword gaps, and optimization tips.
+              </figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="grid-2">
+            <article class="chart-card">
+              <div class="section-head" style="margin-bottom: 18px;">
+                <div>
+                  <p class="section-kicker">ATS snapshot</p>
+                  <h2 style="font-size: 1.35rem;">Why the score changes</h2>
+                </div>
+                <p>Resume structure and keyword matching affect the current score.</p>
+              </div>
+              <div class="chart-row">
+                <div class="donut" data-donut="55" data-label="ATS\n55%" data-accent="var(--violet)"></div>
+                <div class="meter-wrap">
+                  <div class="meter-label"><span>Resume structure and keyword match</span><span>55%</span></div>
+                  <div class="meter"><span data-meter="55"></span></div>
+                  <p class="mini-note">
+                    The live scan highlights strengths, missing keywords, and suggestions for improving the candidate profile.
+                  </p>
+                  <div class="legend-row" style="margin-top: 10px;">
+                    <span class="legend"><i class="green"></i>Strengths</span>
+                    <span class="legend"><i class="amber"></i>Keyword gaps</span>
+                    <span class="legend"><i class="blue"></i>Formatting</span>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="card light">
+              <span class="status-pill done">Best practice</span>
+              <h3 class="step-title">Use the scan before applying</h3>
+              <p class="step-copy">
+                The score updates immediately after a resume upload or after the user presses the scan button. That means the candidate
+                can improve the resume before starting the job application flow.
+              </p>
+              <ul class="bullet-list" style="margin-top: 16px;">
+                <li>Review the ATS summary first.</li>
+                <li>Update the profile if the role needs extra skills or links.</li>
+                <li>Upload a newer resume if the file is outdated.</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="section step-grid">
+          <div class="section-head">
+            <div>
+              <p class="section-kicker">Step 4</p>
+              <h2>Apply for a job and review the workflow</h2>
+            </div>
+            <p>Each job card can be opened, saved, and applied from the jobs grid.</p>
+          </div>
+
+          <div class="step reverse">
+            <figure class="figure">
+              <img src="./assets/screenshots/candidate-applications.png" alt="Candidate applications list" />
+              <figcaption>
+                <strong>Applications area</strong>
+                The application list shows status, workflow stage, and final score after the assessment completes.
+              </figcaption>
+            </figure>
+
+            <article class="card">
+              <span class="status-pill partial">Assessment flow</span>
+              <h3 class="step-title">What happens after Apply</h3>
+              <p class="step-copy">
+                The workflow preview shows which stages are required and which are optional. In the current build, aptitude, technical,
+                and coding can be made optional by the recruiter, while the AI interview remains compulsory.
+              </p>
+              <div class="callout" style="margin-top: 16px;">
+                <strong>Good to know:</strong> The current job shown in the live data uses 5 aptitude questions, 5 technical questions,
+                2 coding prompts, and a 3-question AI interview.
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="section step-grid">
+          <div class="section-head">
+            <div>
+              <p class="section-kicker">Step 5</p>
+              <h2>Read the completed report after the interview</h2>
+            </div>
+            <p>The report is generated after the third answer is submitted.</p>
+          </div>
+
+          <div class="step">
+            <article class="card">
+              <span class="status-pill done">Final state</span>
+              <h3 class="step-title">What the report tells the candidate</h3>
+              <p class="step-copy">
+                Once the AI interview is finished, the backend calculates the final score and generates a report with strengths, gaps,
+                recommendations, and a hiring decision summary.
+              </p>
+              <ul class="check-list" style="margin-top: 16px;">
+                <li>Review the question-by-question feedback.</li>
+                <li>Check the proctoring summary and any warnings.</li>
+                <li>Use the final score to understand where you stand in the pipeline.</li>
+              </ul>
+            </article>
+
+            <figure class="figure">
+              <img src="./assets/screenshots/candidate-report.png" alt="Candidate interview report screen" />
+              <figcaption>
+                <strong>Completed report</strong>
+                This is the live AI report after the 3-question interview was completed on the current production build.
+              </figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <p class="section-kicker">Candidate checklist</p>
+              <h2>What to verify before handing the user back to hiring</h2>
+            </div>
+            <p>Use this if you are helping candidates over the phone or in support chat.</p>
+          </div>
+
+          <div class="grid-3">
+            <article class="card">
+              <h3>Before applying</h3>
+              <ul class="bullet-list" style="margin-top: 12px;">
+                <li>Profile completion is close to 100%.</li>
+                <li>Resume has been uploaded and scanned.</li>
+                <li>The ATS score is visible and understandable.</li>
+              </ul>
+            </article>
+            <article class="card">
+              <h3>During the workflow</h3>
+              <ul class="bullet-list" style="margin-top: 12px;">
+                <li>Optional tests can be skipped when the recruiter marks them optional.</li>
+                <li>The AI interview is always compulsory.</li>
+                <li>Voice capture should remain active while typing or speaking answers.</li>
+              </ul>
+            </article>
+            <article class="card">
+              <h3>After completion</h3>
+              <ul class="bullet-list" style="margin-top: 12px;">
+                <li>Review the final score and report.</li>
+                <li>Keep the submitted CV link for later reference.</li>
+                <li>Check the application history for the latest status.</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <footer class="page-footer">
+          <div>Candidate manual for Invenia AI.</div>
+          <div>Print this page to PDF for a clean handout.</div>
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>

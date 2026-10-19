@@ -92,3 +92,63 @@ invenia-ai/
 
 ## ✅ Deployment Ready
 Your Invenia AI application is now fully configured and ready for Railway deployment!
+
+## Frontend Hosting (Railway + Existing Backend)
+
+Use this when backend is already live on Railway and you want to host only the frontend.
+
+1. Login in your local terminal:
+```bash
+railway login
+```
+2. Link this repo to your Railway project:
+```bash
+railway link
+```
+3. Create a frontend service (first time only):
+```bash
+railway add --service invenia-frontend
+```
+4. Set backend URL for Nginx proxy in that service:
+```bash
+railway variable set BACKEND_UPSTREAM=<your-backend-service-url> --service invenia-frontend
+```
+5. Deploy only the `frontend` folder:
+```bash
+railway up ./frontend --path-as-root --service invenia-frontend
+```
+6. Generate a public domain:
+```bash
+railway domain --service invenia-frontend
+```
+
+Notes:
+- The frontend Docker image now serves React via Nginx and proxies `/api` and `/uploads` to `BACKEND_UPSTREAM`.
+- Backend CORS now supports `ALLOWED_ORIGINS`, `CORS_ORIGINS`, and a Railway domain regex by default.
+
+## Current Railway Split Setup
+
+Use two separate Railway services:
+
+1. Backend service
+   - Root: repository root
+   - Dockerfile: `backend/Dockerfile`
+   - Public URL: Railway-generated backend domain
+   - Important env vars:
+     - `DATABASE_URL` or `RAILWAY_DATABASE_URL`
+     - `SECRET_KEY`
+     - `GEMINI_API_KEY`
+     - `GEMINI_MODEL`
+     - `ELEVENLABS_API_KEY`
+     - `ELEVENLABS_VOICE_ID`
+     - `ELEVENLABS_MODEL_ID`
+     - `CORS_ORIGINS` with the frontend URL if you call the API directly
+
+2. Frontend service
+   - Root: `frontend`
+   - Dockerfile: `frontend/Dockerfile`
+   - Public URL: Railway-generated frontend domain
+   - Important env vars:
+     - `BACKEND_UPSTREAM` set to the backend service public URL
+
+The frontend app uses same-origin `/api` requests in production, while Nginx proxies those requests to `BACKEND_UPSTREAM`. That keeps the browser app fast and avoids extra CORS traffic for normal hosted use.

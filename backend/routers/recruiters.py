@@ -66,6 +66,7 @@ def serialize_recruiter(user: User, profile: RecruiterProfile, db: Session) -> d
             "job_title": profile.job_title,
             "phone": profile.phone,
             "linkedin_url": profile.linkedin_url,
+            "photo_url": profile.photo_url,
             "is_company_verified": profile.is_company_verified,
         },
         "stats": {

@@ -1,7 +1,14 @@
 import axios from 'axios';
 
-export const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:8000';
-export const API_BASE_URL = `${BACKEND_URL}/api`;
+const envBackendUrl = (import.meta.env.VITE_BACKEND_URL || '').trim().replace(/\/+$/, '');
+const defaultBackendUrl = import.meta.env.PROD ? window.location.origin : 'http://localhost:8000';
+
+export const BACKEND_URL = envBackendUrl || defaultBackendUrl;
+export const API_BASE_URL = envBackendUrl
+  ? `${envBackendUrl}/api`
+  : import.meta.env.PROD
+    ? '/api'
+    : `${defaultBackendUrl}/api`;
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -10,11 +17,30 @@ const api = axios.create({
   },
 });
 
+let trackedRequestCount = 0;
+const reportNetworkActivity = () => {
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent('invenia:network-activity', { detail: { count: trackedRequestCount } }));
+  }
+};
+
+const finishTrackedRequest = (config) => {
+  if (!config?.inveniaTrackedRequest) return;
+  config.inveniaTrackedRequest = false;
+  trackedRequestCount = Math.max(0, trackedRequestCount - 1);
+  reportNetworkActivity();
+};
+
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('access_token');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
+    }
+    if (config.showGlobalLoader !== false) {
+      config.inveniaTrackedRequest = true;
+      trackedRequestCount += 1;
+      reportNetworkActivity();
     }
     return config;
   },
@@ -22,8 +48,12 @@ api.interceptors.request.use(
 );
 
 api.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    finishTrackedRequest(response.config);
+    return response;
+  },
   (error) => {
+    finishTrackedRequest(error.config);
     if (error.response?.status === 401) {
       localStorage.removeItem('access_token');
       window.location.href = '/';
@@ -38,6 +68,71 @@ export const buildFileUrl = (path) => {
     return path;
   }
   return `${BACKEND_URL}${path}`;
+};
+
+export const openPreparedPreviewWindow = (title = 'Opening preview...') => {
+  const previewWindow = window.open('', '_blank');
+  if (previewWindow) {
+    previewWindow.document.write(`
+      <!doctype html>
+      <html>
+        <head>
+          <title>${title}</title>
+          <style>
+            body {
+              margin: 0;
+              min-height: 100vh;
+              display: grid;
+              place-items: center;
+              background: #f8fafc;
+              color: #0f172a;
+              font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            }
+            .card {
+              border: 1px solid #dbeafe;
+              border-radius: 24px;
+              padding: 24px 28px;
+              background: white;
+              box-shadow: 0 20px 60px rgba(15, 23, 42, 0.10);
+            }
+          </style>
+        </head>
+        <body><div class="card">Preparing secure preview...</div></body>
+      </html>
+    `);
+    previewWindow.document.close();
+  }
+  return previewWindow;
+};
+
+export const openBlobResponse = (response, preparedWindow = null) => {
+  const blobUrl = URL.createObjectURL(response.data);
+  const opened = preparedWindow && !preparedWindow.closed
+    ? preparedWindow
+    : window.open(blobUrl, '_blank', 'noopener,noreferrer');
+  if (opened && preparedWindow) {
+    opened.location.href = blobUrl;
+    opened.focus?.();
+  }
+  if (!opened) {
+    const link = document.createElement('a');
+    link.href = blobUrl;
+    link.target = '_blank';
+    link.rel = 'noreferrer';
+    link.click();
+  }
+  window.setTimeout(() => URL.revokeObjectURL(blobUrl), 60000);
+};
+
+export const downloadBlobResponse = (response, filename = 'invenia-file') => {
+  const blobUrl = URL.createObjectURL(response.data);
+  const link = document.createElement('a');
+  link.href = blobUrl;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  window.setTimeout(() => URL.revokeObjectURL(blobUrl), 60000);
 };
 
 export const authAPI = {
@@ -66,6 +161,14 @@ export const authAPI = {
     return response.data;
   },
 
+  googleLogin: async (accessToken) => {
+    const response = await api.post('/auth/oauth/google', {
+      provider: 'google',
+      access_token: accessToken,
+    });
+    return response.data;
+  },
+
   getCurrentUser: async () => {
     const response = await api.get('/auth/me');
     return response.data;
@@ -85,6 +188,21 @@ export const candidateAPI = {
         filter_type: filterType,
       },
     });
+    return response.data;
+  },
+
+  getJob: async (jobId) => {
+    const response = await api.get(`/dashboard/candidate/jobs/${jobId}`);
+    return response.data;
+  },
+
+  getJobWorkflowPreview: async (jobId) => {
+    const response = await api.get(`/dashboard/candidate/jobs/${jobId}/application-workflow`);
+    return response.data;
+  },
+
+  trackJobView: async (jobId) => {
+    const response = await api.post(`/dashboard/candidate/jobs/${jobId}/view`);
     return response.data;
   },
 
@@ -108,8 +226,18 @@ export const candidateAPI = {
     return response.data;
   },
 
+  revokeApplication: async (applicationId) => {
+    const response = await api.post(`/dashboard/candidate/applications/${applicationId}/revoke`);
+    return response.data;
+  },
+
   getProfile: async () => {
     const response = await api.get('/dashboard/candidate/profile');
+    return response.data;
+  },
+
+  checkATSScore: async () => {
+    const response = await api.post('/dashboard/candidate/profile/ats');
     return response.data;
   },
 
@@ -129,6 +257,66 @@ export const candidateAPI = {
     });
     return response.data;
   },
+
+  uploadPhoto: async (file) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    const response = await api.post('/dashboard/candidate/upload-photo', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
+    return response.data;
+  },
+
+  autofillProfile: async ({ file, text = '' }) => {
+    const formData = new FormData();
+    if (file) {
+      formData.append('file', file);
+    }
+    if (text) {
+      formData.append('text', text);
+    }
+    const response = await api.post('/dashboard/candidate/profile/autofill', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
+  },
+
+  getResume: async () => {
+    const response = await api.get('/dashboard/candidate/resume', {
+      responseType: 'blob',
+      validateStatus: (status) => status < 500,
+    });
+    return response;
+  },
+
+  getApplicationResume: async (applicationId) => {
+    const response = await api.get(`/dashboard/candidate/applications/${applicationId}/resume`, {
+      responseType: 'blob',
+      validateStatus: (status) => status < 500,
+    });
+    return response;
+  },
+
+  getApplicationWorkflow: async (applicationId) => {
+    const response = await api.get(`/dashboard/candidate/applications/${applicationId}/workflow`);
+    return response.data;
+  },
+
+  submitWorkflowStage: async (applicationId, payload) => {
+    const response = await api.post(`/dashboard/candidate/applications/${applicationId}/workflow-stage`, payload);
+    return response.data;
+  },
+
+  uploadInterviewRecording: async (applicationId, formData) => {
+    const response = await api.post(`/dashboard/candidate/applications/${applicationId}/interview-recording`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
+  },
 };
 
 export const recruiterAPI = {
@@ -141,6 +329,27 @@ export const recruiterAPI = {
     const response = await api.get('/dashboard/recruiter/jobs', {
       params: {
         search: search || undefined,
+      },
+    });
+    return response.data;
+  },
+
+  getJob: async (jobId) => {
+    const response = await api.get(`/dashboard/recruiter/jobs/${jobId}`);
+    return response.data;
+  },
+
+  autofillJob: async ({ file, text = '' }) => {
+    const formData = new FormData();
+    if (file) {
+      formData.append('file', file);
+    }
+    if (text) {
+      formData.append('text', text);
+    }
+    const response = await api.post('/dashboard/recruiter/jobs/autofill', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
       },
     });
     return response.data;
@@ -173,6 +382,38 @@ export const recruiterAPI = {
     return response.data;
   },
 
+  getApplicationResume: async (applicationId) => {
+    const response = await api.get(`/dashboard/recruiter/applications/${applicationId}/resume`, {
+      responseType: 'blob',
+      validateStatus: (status) => status < 500,
+    });
+    return response;
+  },
+
+  getCandidateResume: async (candidateId) => {
+    const response = await api.get(`/dashboard/recruiter/candidates/${candidateId}/resume`, {
+      responseType: 'blob',
+      validateStatus: (status) => status < 500,
+    });
+    return response;
+  },
+
+  getInterviewRecording: async (applicationId) => {
+    const response = await api.get(`/dashboard/recruiter/applications/${applicationId}/interview-recording`, {
+      responseType: 'blob',
+      validateStatus: (status) => status < 500,
+    });
+    return response;
+  },
+
+  getInterviewSnapshot: async (applicationId) => {
+    const response = await api.get(`/dashboard/recruiter/applications/${applicationId}/interview-snapshot`, {
+      responseType: 'blob',
+      validateStatus: (status) => status < 500,
+    });
+    return response;
+  },
+
   getCandidates: async (search = '', status = 'all') => {
     const response = await api.get('/dashboard/recruiter/candidates', {
       params: {
@@ -180,6 +421,18 @@ export const recruiterAPI = {
         status,
       },
     });
+    return response.data;
+  },
+
+  updateCandidateAccess: async (candidateId, isActive) => {
+    const response = await api.patch(`/dashboard/recruiter/candidates/${candidateId}/access`, {
+      is_active: isActive,
+    });
+    return response.data;
+  },
+
+  deleteCandidate: async (candidateId) => {
+    const response = await api.delete(`/dashboard/recruiter/candidates/${candidateId}`);
     return response.data;
   },
 
@@ -205,6 +458,13 @@ export const recruiterAPI = {
     return response.data;
   },
 
+  downloadExport: async (exportType) => {
+    const response = await api.get(`/dashboard/recruiter/export/${exportType}`, {
+      responseType: 'blob',
+    });
+    return response;
+  },
+
   getProfile: async () => {
     const response = await api.get('/dashboard/recruiter/profile');
     return response.data;
@@ -212,6 +472,15 @@ export const recruiterAPI = {
 
   updateProfile: async (profileData) => {
     const response = await api.put('/dashboard/recruiter/profile', profileData);
+    return response.data;
+  },
+
+  uploadPhoto: async (file) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    const response = await api.post('/dashboard/recruiter/upload-photo', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
     return response.data;
   },
 

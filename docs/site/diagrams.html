@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Invenia AI Diagrams</title>
+    <link rel="stylesheet" href="./assets/styles.css" />
+    <script defer src="./assets/app.js"></script>
+  </head>
+  <body data-page="diagrams">
+    <div class="docs-shell">
+      <header class="topbar">
+        <div class="brand">
+          <div class="brand-mark">IA</div>
+          <div class="brand-copy">
+            <strong>Diagram Board</strong>
+            <span>Architecture, use case, and data flow</span>
+          </div>
+        </div>
+        <nav class="nav" aria-label="Documentation navigation">
+          <a href="./index.html">Overview</a>
+          <a href="./candidate-manual.html">Candidate Manual</a>
+          <a href="./recruiter-manual.html">Recruiter Manual</a>
+          <a href="./diagrams.html">Diagrams</a>
+          <a href="./system-guide.html">System Guide</a>
+        </nav>
+        <div class="toolbar">
+          <a class="btn btn-secondary doc-link" data-open-live href="#">Open Live App</a>
+          <button class="btn btn-primary" data-print>Download PDF</button>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero">
+          <div class="hero-grid">
+            <div>
+              <span class="eyebrow">Visual documentation</span>
+              <h1>Three diagrams, laid out like a presentation board.</h1>
+              <p>
+                The architecture, use-case, and data-flow views below are rendered in HTML and CSS with layered connector lines.
+                They are intentionally colorful so the system reads like a polished design artifact instead of a plain technical note.
+              </p>
+              <div class="tag-row">
+                <span class="tag">Icon-like badges</span>
+                <span class="tag">Connector lines</span>
+                <span class="tag">Print friendly</span>
+                <span class="tag">Whiteboard style</span>
+              </div>
+              <div class="hero-quote">
+                <strong>Tip:</strong> Use this page when explaining the platform to stakeholders, architects, or onboarding engineers.
+              </div>
+            </div>
+
+            <div class="hero-panel">
+              <div class="stat-grid">
+                <article class="stat-card">
+                  <div class="kicker">Boards</div>
+                  <div class="value" data-count="3">3</div>
+                  <div class="sub">Architecture, use case, and data flow.</div>
+                </article>
+                <article class="stat-card">
+                  <div class="kicker">Actors</div>
+                  <div class="value" data-count="3">3</div>
+                  <div class="sub">Candidate, Recruiter, and Super Recruiter.</div>
+                </article>
+                <article class="stat-card">
+                  <div class="kicker">Services</div>
+                  <div class="value" data-count="5">5</div>
+                  <div class="sub">Frontend, backend, DB, Gemini, and TTS.</div>
+                </article>
+                <article class="stat-card">
+                  <div class="kicker">Print</div>
+                  <div class="value" data-count="100">100%</div>
+                  <div class="sub">Landscape-ready when exported to PDF.</div>
+                </article>
+              </div>
+
+              <div class="notice">
+                The diagrams mirror the current implementation, not a future roadmap.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <p class="section-kicker">Architecture</p>
+              <h2>System architecture diagram</h2>
+            </div>
+            <p>Users enter through the frontend, which talks to the backend, data store, file storage, Gemini, and ElevenLabs.</p>
+          </div>
+
+          <div class="diagram-board" data-diagram-board style="--glow-x: 50%; --glow-y: 50%;">
+            <div class="grid-overlay"></div>
+            <svg class="connector-layer" viewBox="0 0 1260 760" preserveAspectRatio="none" aria-hidden="true">
+              <defs>
+                <marker id="arrow-blue" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+                  <path d="M0,0 L0,6 L8,3 z" fill="#5bc0ff"></path>
+                </marker>
+                <marker id="arrow-violet" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+                  <path d="M0,0 L0,6 L8,3 z" fill="#8b5cf6"></path>
+                </marker>
+                <marker id="arrow-green" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+                  <path d="M0,0 L0,6 L8,3 z" fill="#10b981"></path>
+                </marker>
+              </defs>
+              <path d="M250 132 C350 132, 390 132, 520 160" stroke="#5bc0ff" stroke-width="3" fill="none" marker-end="url(#arrow-blue)" opacity="0.9"></path>
+              <path d="M250 254 C350 254, 390 200, 520 182" stroke="#8b5cf6" stroke-width="3" fill="none" marker-end="url(#arrow-violet)" opacity="0.9"></path>
+              <path d="M640 196 C640 240, 640 250, 640 296" stroke="#5bc0ff" stroke-width="3" fill="none" marker-end="url(#arrow-blue)" opacity="0.95"></path>
+              <path d="M760 330 C820 280, 820 202, 884 150" stroke="#10b981" stroke-width="3" fill="none" marker-end="url(#arrow-green)" opacity="0.9"></path>
+              <path d="M760 348 C820 330, 820 280, 884 244" stroke="#f59e0b" stroke-width="3" fill="none" marker-end="url(#arrow-green)" opacity="0.9"></path>
+              <path d="M760 360 C820 372, 820 400, 884 398" stroke="#8b5cf6" stroke-width="3" fill="none" marker-end="url(#arrow-violet)" opacity="0.9"></path>
+              <path d="M760 374 C820 446, 820 500, 884 530" stroke="#f43f5e" stroke-width="3" fill="none" marker-end="url(#arrow-violet)" opacity="0.9"></path>
+              <path d="M640 296 C640 258, 640 220, 640 196" stroke="#22d3ee" stroke-width="2" fill="none" stroke-dasharray="8 8" opacity="0.4"></path>
+            </svg>
+
+            <div class="diagram-node" style="left: 34px; top: 78px;">
+              <span class="badge">CD</span>
+              <h3>Candidate</h3>
+              <p>Uploads a resume, checks ATS score, applies for jobs, and answers the interview questions.</p>
+              <div class="mini-tags">
+                <span class="mini-tag">Resume</span>
+                <span class="mini-tag">ATS</span>
+                <span class="mini-tag">Interview</span>
+              </div>
+            </div>
+
+            <div class="diagram-node" style="left: 34px; top: 202px;">
+              <span class="badge" style="background: linear-gradient(135deg, #8b5cf6, #f43f5e);">RC</span>
+              <h3>Recruiter</h3>
+              <p>Creates jobs, defines assessment rules, reviews candidates, schedules interviews, and checks reports.</p>
+              <div class="mini-tags">
+                <span class="mini-tag">Jobs</span>
+                <span class="mini-tag">Pipeline</span>
+                <span class="mini-tag">Report</span>
+              </div>
+            </div>
+
+            <div class="diagram-node" style="left: 260px; top: 126px;">
+              <span class="badge" style="background: linear-gradient(135deg, #10b981, #22d3ee);">UI</span>
+              <h3>Frontend App</h3>
+              <p>React and Vite deliver the candidate and recruiter dashboards with Nginx serving the production build.</p>
+              <div class="mini-tags">
+                <span class="mini-tag">React</span>
+                <span class="mini-tag">Vite</span>
+                <span class="mini-tag">Nginx</span>
+              </div>
+            </div>
+
+            <div class="diagram-node wide" style="left: 520px; top: 120px;">
+              <span class="badge" style="background: linear-gradient(135deg, #2563eb, #8b5cf6);">API</span>
+              <h3>FastAPI backend</h3>
+              <p>The backend handles authentication, profile data, jobs, applications, workflow progression, interviews, and uploads.</p>
+              <div class="mini-tags">
+                <span class="mini-tag">JWT</span>
+                <span class="mini-tag">Routes</span>
+                <span class="mini-tag">Uploads</span>
+                <span class="mini-tag">Workflow</span>
+              </div>
+            </div>
+
+            <div class="diagram-node" style="left: 900px; top: 62px;">
+              <span class="badge" style="background: linear-gradient(135deg, #0ea5e9, #2563eb);">DB</span>
+              <h3>Database</h3>
+              <p>Users, candidate profiles, recruiter profiles, jobs, applications, and interviews are stored here.</p>
+              <div class="mini-tags">
+                <span class="mini-tag">Users</span>
+                <span class="mini-tag">Jobs</span>
+                <span class="mini-tag">Reports</span>
+              </div>
+            </div>
+
+            <div class="diagram-node" style="left: 900px; top: 208px;">
+              <span class="badge" style="background: linear-gradient(135deg, #f59e0b, #ef4444);">FS</span>
+              <h3>File storage</h3>
+              <p>Uploaded resumes, interview snapshots, and recordings are written to media folders and exposed through URLs.</p>
+              <div class="mini-tags">
+                <span class="mini-tag">CV</span>
+                <span class="mini-tag">Snapshot</span>
+                <span class="mini-tag">Recording</span>
+              </div>
+            </div>
+
+            <div class="diagram-node" style="left: 900px; top: 352px;">
+              <span class="badge" style="background: linear-gradient(135deg, #22d3ee, #8b5cf6);">AI</span>
+              <h3>Gemini AI</h3>
+              <p>Generates ATS scoring, aptitude questions, technical MCQs, coding prompts, interview questions, and report analysis.</p>
+              <div class="mini-tags">
+                <span class="mini-tag">MCQs</span>
+                <span class="mini-tag">Interview</span>
+                <span class="mini-tag">Report</span>
+              </div>
+            </div>
+
+            <div class="diagram-node" style="left: 900px; top: 496px;">
+              <span class="badge" style="background: linear-gradient(135deg, #10b981, #14b8a6);">TTS</span>
+              <h3>ElevenLabs TTS</h3>
+              <p>Speaks the interview question aloud so the candidate can hear every prompt during the voice interview.</p>
+              <div class="mini-tags">
+                <span class="mini-tag">Voice</span>
+                <span class="mini-tag">Prompt</span>
+                <span class="mini-tag">Playback</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <p class="section-kicker">Use case mapping</p>
+              <h2>Use-case diagram</h2>
+            </div>
+            <p>Each role has a distinct set of things it can do in the platform.</p>
+          </div>
+
+          <div class="diagram-board" style="min-height: 700px;">
+            <div class="grid-overlay"></div>
+            <svg class="connector-layer" viewBox="0 0 1260 700" preserveAspectRatio="none" aria-hidden="true">
+              <defs>
+                <marker id="arrow-white" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+                  <path d="M0,0 L0,6 L8,3 z" fill="#dbeafe"></path>
+                </marker>
+              </defs>
+              <path d="M250 145 C340 145, 330 110, 440 110" stroke="#5bc0ff" stroke-width="2.6" fill="none" marker-end="url(#arrow-white)" opacity="0.9"></path>
+              <path d="M250 145 C340 145, 330 188, 440 188" stroke="#5bc0ff" stroke-width="2.6" fill="none" marker-end="url(#arrow-white)" opacity="0.9"></path>
+              <path d="M250 145 C340 145, 330 266, 440 266" stroke="#5bc0ff" stroke-width="2.6" fill="none" marker-end="url(#arrow-white)" opacity="0.9"></path>
+              <path d="M250 145 C340 145, 330 344, 440 344" stroke="#5bc0ff" stroke-width="2.6" fill="none" marker-end="url(#arrow-white)" opacity="0.9"></path>
+              <path d="M250 145 C340 145, 330 422, 440 422" stroke="#5bc0ff" stroke-width="2.6" fill="none" marker-end="url(#arrow-white)" opacity="0.9"></path>
+              <path d="M250 310 C340 310, 330 188, 440 188" stroke="#8b5cf6" stroke-width="2.6" fill="none" marker-end="url(#arrow-white)" opacity="0.9"></path>
+              <path d="M250 310 C340 310, 330 266, 440 266" stroke="#8b5cf6" stroke-width="2.6" fill="none" marker-end="url(#arrow-white)" opacity="0.9"></path>
+              <path d="M250 310 C340 310, 330 344, 440 344" stroke="#8b5cf6" stroke-width="2.6" fill="none" marker-end="url(#arrow-white)" opacity="0.9"></path>
+              <path d="M250 310 C340 310, 330 422, 440 422" stroke="#8b5cf6" stroke-width="2.6" fill="none" marker-end="url(#arrow-white)" opacity="0.9"></path>
+              <path d="M250 490 C340 490, 330 500, 440 500" stroke="#10b981" stroke-width="2.6" fill="none" marker-end="url(#arrow-white)" opacity="0.9"></path>
+            </svg>
+
+            <div class="diagram-node" style="left: 40px; top: 96px; width: 190px;">
+              <span class="badge">CD</span>
+              <h3>Candidate</h3>
+              <p>Applies, takes tests, joins interview, and sees the final report.</p>
+            </div>
+            <div class="diagram-node" style="left: 40px; top: 262px; width: 190px;">
+              <span class="badge" style="background: linear-gradient(135deg, #8b5cf6, #ef4444);">RC</span>
+              <h3>Recruiter</h3>
+              <p>Creates jobs, reviews the pipeline, schedules interviews, and tracks analytics.</p>
+            </div>
+            <div class="diagram-node" style="left: 40px; top: 442px; width: 190px;">
+              <span class="badge" style="background: linear-gradient(135deg, #0ea5e9, #10b981);">SR</span>
+              <h3>Super recruiter</h3>
+              <p>Manages recruiter access and handles platform-wide administration.</p>
+            </div>
+
+            <div class="diagram-node" style="left: 440px; top: 70px; width: 220px;">
+              <span class="badge">L1</span>
+              <h3>Login / Sign up</h3>
+              <p>Separate entry paths for candidate and recruiter accounts.</p>
+            </div>
+            <div class="diagram-node" style="left: 440px; top: 148px; width: 220px;">
+              <span class="badge" style="background: linear-gradient(135deg, #5bc0ff, #8b5cf6);">P1</span>
+              <h3>Candidate profile</h3>
+              <p>Edit resume-related data and keep the ATS score current.</p>
+            </div>
+            <div class="diagram-node" style="left: 440px; top: 226px; width: 220px;">
+              <span class="badge" style="background: linear-gradient(135deg, #10b981, #22d3ee);">J1</span>
+              <h3>Browse jobs</h3>
+              <p>Search, save, and apply for active job cards.</p>
+            </div>
+            <div class="diagram-node" style="left: 440px; top: 304px; width: 220px;">
+              <span class="badge" style="background: linear-gradient(135deg, #f59e0b, #ef4444);">W1</span>
+              <h3>Assessment flow</h3>
+              <p>Aptitude, technical, coding, and interview stages with required flags.</p>
+            </div>
+            <div class="diagram-node" style="left: 440px; top: 382px; width: 220px;">
+              <span class="badge" style="background: linear-gradient(135deg, #8b5cf6, #22d3ee);">R1</span>
+              <h3>Review report</h3>
+              <p>See the completed interview report and workflow summary.</p>
+            </div>
+            <div class="diagram-node" style="left: 440px; top: 476px; width: 220px;">
+              <span class="badge" style="background: linear-gradient(135deg, #10b981, #2563eb);">A1</span>
+              <h3>Create / edit jobs</h3>
+              <p>Define title, description, salary, and stage configuration.</p>
+            </div>
+
+            <div class="diagram-node" style="left: 760px; top: 112px; width: 270px;">
+              <span class="badge">01</span>
+              <h3>Candidate actions</h3>
+              <p>Login, update profile, upload resume, scan ATS, apply, complete interview, and read the report.</p>
+            </div>
+            <div class="diagram-node" style="left: 760px; top: 268px; width: 270px;">
+              <span class="badge" style="background: linear-gradient(135deg, #8b5cf6, #f59e0b);">02</span>
+              <h3>Recruiter actions</h3>
+              <p>Create jobs, toggle screening rules, monitor candidates, schedule interviews, and view analytics.</p>
+            </div>
+            <div class="diagram-node" style="left: 760px; top: 446px; width: 270px;">
+              <span class="badge" style="background: linear-gradient(135deg, #0ea5e9, #10b981);">03</span>
+              <h3>Super recruiter actions</h3>
+              <p>Everything a recruiter can do, plus management of recruiter access and admin-level oversight.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <p class="section-kicker">Data movement</p>
+              <h2>Data flow diagram</h2>
+            </div>
+            <p>The application moves through authentication, profile/resume handling, assessment generation, interview, and reporting.</p>
+          </div>
+
+          <div class="diagram-board" style="min-height: 760px;">
+            <div class="grid-overlay"></div>
+            <svg class="connector-layer" viewBox="0 0 1260 760" preserveAspectRatio="none" aria-hidden="true">
+              <defs>
+                <marker id="arrow-data" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+                  <path d="M0,0 L0,6 L8,3 z" fill="#22d3ee"></path>
+                </marker>
+              </defs>
+              <path d="M250 130 C340 130, 390 130, 500 130" stroke="#22d3ee" stroke-width="3" fill="none" marker-end="url(#arrow-data)" opacity="0.9"></path>
+              <path d="M250 300 C340 300, 390 216, 500 196" stroke="#22d3ee" stroke-width="3" fill="none" marker-end="url(#arrow-data)" opacity="0.9"></path>
+              <path d="M250 470 C340 470, 390 290, 500 272" stroke="#22d3ee" stroke-width="3" fill="none" marker-end="url(#arrow-data)" opacity="0.9"></path>
+              <path d="M250 630 C340 630, 390 370, 500 350" stroke="#22d3ee" stroke-width="3" fill="none" marker-end="url(#arrow-data)" opacity="0.9"></path>
+              <path d="M520 170 C610 170, 660 170, 760 170" stroke="#5bc0ff" stroke-width="3" fill="none" marker-end="url(#arrow-data)" opacity="0.9"></path>
+              <path d="M520 248 C610 248, 660 230, 760 230" stroke="#8b5cf6" stroke-width="3" fill="none" marker-end="url(#arrow-data)" opacity="0.9"></path>
+              <path d="M520 326 C610 326, 660 294, 760 294" stroke="#10b981" stroke-width="3" fill="none" marker-end="url(#arrow-data)" opacity="0.9"></path>
+              <path d="M520 404 C610 404, 660 360, 760 360" stroke="#f59e0b" stroke-width="3" fill="none" marker-end="url(#arrow-data)" opacity="0.9"></path>
+              <path d="M520 494 C610 494, 660 444, 760 444" stroke="#f43f5e" stroke-width="3" fill="none" marker-end="url(#arrow-data)" opacity="0.9"></path>
+              <path d="M760 190 C850 170, 910 140, 1000 124" stroke="#22d3ee" stroke-width="3" fill="none" marker-end="url(#arrow-data)" opacity="0.9"></path>
+              <path d="M760 272 C850 250, 910 220, 1000 210" stroke="#22d3ee" stroke-width="3" fill="none" marker-end="url(#arrow-data)" opacity="0.9"></path>
+              <path d="M760 354 C850 330, 910 300, 1000 300" stroke="#22d3ee" stroke-width="3" fill="none" marker-end="url(#arrow-data)" opacity="0.9"></path>
+              <path d="M760 438 C850 410, 910 380, 1000 390" stroke="#22d3ee" stroke-width="3" fill="none" marker-end="url(#arrow-data)" opacity="0.9"></path>
+            </svg>
+
+            <div class="diagram-node" style="left: 40px; top: 96px; width: 190px;">
+              <span class="badge">C</span>
+              <h3>Candidate</h3>
+              <p>Starts the flow by logging in and uploading a resume.</p>
+            </div>
+            <div class="diagram-node" style="left: 40px; top: 266px; width: 190px;">
+              <span class="badge" style="background: linear-gradient(135deg, #8b5cf6, #f59e0b);">R</span>
+              <h3>Recruiter</h3>
+              <p>Creates jobs and reviews candidate progress.</p>
+            </div>
+            <div class="diagram-node" style="left: 40px; top: 436px; width: 190px;">
+              <span class="badge" style="background: linear-gradient(135deg, #10b981, #22d3ee);">A</span>
+              <h3>AI services</h3>
+              <p>Support ATS, question generation, and report analysis.</p>
+            </div>
+            <div class="diagram-node" style="left: 40px; top: 606px; width: 190px;">
+              <span class="badge" style="background: linear-gradient(135deg, #f43f5e, #8b5cf6);">F</span>
+              <h3>File store</h3>
+              <p>Receives resumes, recordings, and snapshots.</p>
+            </div>
+
+            <div class="diagram-node" style="left: 500px; top: 88px; width: 230px;">
+              <span class="badge">1</span>
+              <h3>Authentication</h3>
+              <p>Token is created after login and attached to later API calls.</p>
+            </div>
+            <div class="diagram-node" style="left: 500px; top: 166px; width: 230px;">
+              <span class="badge" style="background: linear-gradient(135deg, #5bc0ff, #8b5cf6);">2</span>
+              <h3>Profile + resume</h3>
+              <p>Candidate profile data and resume uploads are stored and re-scanned.</p>
+            </div>
+            <div class="diagram-node" style="left: 500px; top: 244px; width: 230px;">
+              <span class="badge" style="background: linear-gradient(135deg, #10b981, #22d3ee);">3</span>
+              <h3>Job posting</h3>
+              <p>Recruiter enters the job details and assessment configuration.</p>
+            </div>
+            <div class="diagram-node" style="left: 500px; top: 322px; width: 230px;">
+              <span class="badge" style="background: linear-gradient(135deg, #f59e0b, #ef4444);">4</span>
+              <h3>Workflow engine</h3>
+              <p>Builds the screening sequence, scores the rounds, and tracks completion.</p>
+            </div>
+            <div class="diagram-node" style="left: 500px; top: 410px; width: 230px;">
+              <span class="badge" style="background: linear-gradient(135deg, #8b5cf6, #22d3ee);">5</span>
+              <h3>Interview capture</h3>
+              <p>Records camera, snapshot, transcript, and proctoring state.</p>
+            </div>
+
+            <div class="diagram-node" style="left: 960px; top: 104px; width: 250px;">
+              <span class="badge">DB</span>
+              <h3>Database</h3>
+              <p>Stores users, profiles, jobs, applications, interview reports, and analytics.</p>
+            </div>
+            <div class="diagram-node" style="left: 960px; top: 196px; width: 250px;">
+              <span class="badge" style="background: linear-gradient(135deg, #10b981, #0ea5e9);">FS</span>
+              <h3>Media storage</h3>
+              <p>Stores uploaded files and interview assets under public URLs.</p>
+            </div>
+            <div class="diagram-node" style="left: 960px; top: 288px; width: 250px;">
+              <span class="badge" style="background: linear-gradient(135deg, #22d3ee, #8b5cf6);">AI</span>
+              <h3>Gemini analysis</h3>
+              <p>Scans resumes, creates questions, and summarizes interview outcomes.</p>
+            </div>
+            <div class="diagram-node" style="left: 960px; top: 380px; width: 250px;">
+              <span class="badge" style="background: linear-gradient(135deg, #f59e0b, #ef4444);">TTS</span>
+              <h3>ElevenLabs speech</h3>
+              <p>Speaks the interview prompt aloud in the live interview room.</p>
+            </div>
+          </div>
+        </section>
+
+        <footer class="page-footer">
+          <div>Diagram board for Invenia AI.</div>
+          <div>Export this page to PDF for a visual architecture handout.</div>
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>

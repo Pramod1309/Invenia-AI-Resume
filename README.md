@@ -218,3 +218,17 @@ uvicorn main:app --host 0.0.0.0 --port 8000  # Production
 ## License
 
 This project is licensed under the MIT License.
+
+
+## API Keys
+
+### Google API Key
+Set `GOOGLE_API_KEY` in `backend/.env`. Never commit the real key.
+
+
+### NVIDIA API Key
+Set `NVIDIA_API_KEY` in `backend/.env`. Never commit the real key.
+
+
+### Groq API Key
+Set `GROQ_API_KEY` in `backend/.env`. Never commit the real key.

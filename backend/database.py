@@ -20,7 +20,7 @@ def resolve_database_url() -> str:
 
 
 DATABASE_URL = resolve_database_url()
-engine_kwargs = {}
+engine_kwargs = {"pool_pre_ping": True}
 
 if DATABASE_URL.startswith("sqlite"):
     engine_kwargs["connect_args"] = {"check_same_thread": False}

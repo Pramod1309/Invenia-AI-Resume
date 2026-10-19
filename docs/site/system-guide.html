@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Invenia AI System Guide</title>
+    <link rel="stylesheet" href="./assets/styles.css" />
+    <script defer src="./assets/app.js"></script>
+  </head>
+  <body data-page="system-guide">
+    <div class="docs-shell">
+      <header class="topbar">
+        <div class="brand">
+          <div class="brand-mark">IA</div>
+          <div class="brand-copy">
+            <strong>System Guide</strong>
+            <span>Visual product map, module inventory, and status board</span>
+          </div>
+        </div>
+        <nav class="nav" aria-label="Documentation navigation">
+          <a href="./index.html">Overview</a>
+          <a href="./candidate-manual.html">Candidate Manual</a>
+          <a href="./recruiter-manual.html">Recruiter Manual</a>
+          <a href="./diagrams.html">Diagrams</a>
+          <a href="./system-guide.html">System Guide</a>
+        </nav>
+        <div class="toolbar">
+          <a class="btn btn-secondary doc-link" data-open-live href="#">Open Live App</a>
+          <button class="btn btn-primary" data-print>Download PDF</button>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero">
+          <div class="hero-grid">
+            <div>
+              <span class="eyebrow">Invenia AI system guide</span>
+              <h1>A creative, printable map of the current build.</h1>
+              <p>
+                This guide is a richer HTML version of the markdown system overview. It keeps the same factual scope while making the
+                content easier to scan with tables, charts, status cards, and a cleaner visual hierarchy.
+              </p>
+              <div class="tag-row">
+                <span class="tag">Module inventory</span>
+                <span class="tag">Implementation status</span>
+                <span class="tag">Done vs pending</span>
+                <span class="tag">Manual guide</span>
+              </div>
+              <div class="hero-quote">
+                <strong>Live app:</strong>
+                <a class="doc-link" href="https://frontend-production-a792.up.railway.app/" target="_blank" rel="noreferrer">
+                  https://frontend-production-a792.up.railway.app/
+                </a>
+                <div class="mini-note" style="margin-top: 10px;">
+                  The guide describes the current implementation only, not a future roadmap.
+                </div>
+              </div>
+            </div>
+
+            <div class="hero-panel">
+              <div class="stat-grid">
+                <article class="stat-card">
+                  <div class="kicker">Frontend modules</div>
+                  <div class="value" data-count="10">10</div>
+                  <div class="sub">App shell, dashboards, logins, API client, build/runtime.</div>
+                </article>
+                <article class="stat-card">
+                  <div class="kicker">Backend modules</div>
+                  <div class="value" data-count="15">15</div>
+                  <div class="sub">Auth, routers, workflows, AI helpers, database, and hosting.</div>
+                </article>
+                <article class="stat-card">
+                  <div class="kicker">Runtime stores</div>
+                  <div class="value" data-count="9">9</div>
+                  <div class="sub">Users, profiles, jobs, applications, interviews, uploads.</div>
+                </article>
+                <article class="stat-card">
+                  <div class="kicker">AI services</div>
+                  <div class="value" data-count="2">2</div>
+                  <div class="sub">Gemini for intelligence, ElevenLabs for interview voice.</div>
+                </article>
+              </div>
+
+              <div class="notice">
+                The same live app URL is shared across the candidate and recruiter manuals, so the documentation stays aligned.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <p class="section-kicker">Product snapshot</p>
+              <h2>What the platform currently does</h2>
+            </div>
+            <p>Invenia AI is a dual-role hiring platform for candidates and recruiters.</p>
+          </div>
+
+          <div class="grid-3">
+            <article class="chart-card">
+              <div class="chart-row">
+                <div class="donut" data-donut="92" data-label="Candidate\nportal" data-accent="var(--blue)"></div>
+                <div class="meter-wrap">
+                  <div class="meter-label"><span>ATS, profile, apply, and interview flow</span><span>92%</span></div>
+                  <div class="meter"><span data-meter="92"></span></div>
+                  <p class="mini-note">This is the biggest end-user surface in the current build.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="chart-card">
+              <div class="chart-row">
+                <div class="donut" data-donut="89" data-label="Recruiter\nportal" data-accent="var(--violet)"></div>
+                <div class="meter-wrap">
+                  <div class="meter-label"><span>Jobs, pipeline, analytics, and interviews</span><span>89%</span></div>
+                  <div class="meter"><span data-meter="89"></span></div>
+                  <p class="mini-note">Recruiters can shape the screening journey before candidates apply.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="chart-card">
+              <div class="chart-row">
+                <div class="donut" data-donut="86" data-label="AI\nstack" data-accent="var(--green)"></div>
+                <div class="meter-wrap">
+                  <div class="meter-label"><span>Resume scoring, question generation, and reports</span><span>86%</span></div>
+                  <div class="meter"><span data-meter="86"></span></div>
+                  <p class="mini-note">Gemini and ElevenLabs are already wired into the workflow engine.</p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <p class="section-kicker">Module inventory</p>
+              <h2>Frontend modules</h2>
+            </div>
+            <p>These files make up the visible application experience.</p>
+          </div>
+
+          <div class="table-wrap">
+            <table class="module-table">
+              <thead>
+                <tr>
+                  <th>Module</th>
+                  <th>File(s)</th>
+                  <th>Purpose</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>App shell</td>
+                  <td>frontend/src/App.jsx, frontend/src/main.jsx</td>
+                  <td>Sets up splash screen and route-based navigation.</td>
+                </tr>
+                <tr>
+                  <td>Splash screen</td>
+                  <td>frontend/src/components/SplashScreen.jsx</td>
+                  <td>Animated landing splash before login.</td>
+                </tr>
+                <tr>
+                  <td>Login selector</td>
+                  <td>frontend/src/pages/LoginSelector.jsx</td>
+                  <td>Role selection between Candidate and Recruiter.</td>
+                </tr>
+                <tr>
+                  <td>Candidate login</td>
+                  <td>frontend/src/pages/CandidateLogin.jsx</td>
+                  <td>Candidate email and password login form.</td>
+                </tr>
+                <tr>
+                  <td>Recruiter login</td>
+                  <td>frontend/src/pages/RecruiterLogin.jsx</td>
+                  <td>Recruiter email and password login form.</td>
+                </tr>
+                <tr>
+                  <td>Candidate sign-up</td>
+                  <td>frontend/src/pages/CandidateSignUp.jsx</td>
+                  <td>Candidate account creation.</td>
+                </tr>
+                <tr>
+                  <td>Candidate dashboard</td>
+                  <td>frontend/src/pages/CandidateDashboard.jsx</td>
+                  <td>Jobs, applications, ATS, workflow, interview, and profile management.</td>
+                </tr>
+                <tr>
+                  <td>Recruiter dashboard</td>
+                  <td>frontend/src/pages/RecruiterDashboard.jsx</td>
+                  <td>Job creation, pipeline review, analytics, recruiter management.</td>
+                </tr>
+                <tr>
+                  <td>API client</td>
+                  <td>frontend/src/services/api.js</td>
+                  <td>Axios wrapper, auth headers, file URL builder, typed API helpers.</td>
+                </tr>
+                <tr>
+                  <td>Build/runtime</td>
+                  <td>frontend/Dockerfile, frontend/nginx.conf</td>
+                  <td>Railway frontend container and Nginx serving/proxy configuration.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <p class="section-kicker">Module inventory</p>
+              <h2>Backend modules</h2>
+            </div>
+            <p>The backend carries authentication, workflow, AI, and storage responsibilities.</p>
+          </div>
+
+          <div class="table-wrap">
+            <table class="module-table">
+              <thead>
+                <tr>
+                  <th>Module</th>
+                  <th>File(s)</th>
+                  <th>Purpose</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>FastAPI app entry</td>
+                  <td>backend/main.py</td>
+                  <td>App startup, CORS, static mount, health checks, migrations, super recruiter bootstrap.</td>
+                </tr>
+                <tr>
+                  <td>Authentication core</td>
+                  <td>backend/auth.py</td>
+                  <td>Password hashing, JWT, role checks, current user helpers.</td>
+                </tr>
+                <tr>
+                  <td>Database layer</td>
+                  <td>backend/database.py</td>
+                  <td>SQLAlchemy engine, session, and pool config.</td>
+                </tr>
+                <tr>
+                  <td>Data models</td>
+                  <td>backend/models.py</td>
+                  <td>Users, profiles, jobs, applications, interviews, saved jobs, analytics.</td>
+                </tr>
+                <tr>
+                  <td>Schemas</td>
+                  <td>backend/schemas.py</td>
+                  <td>Request and response validation with Pydantic.</td>
+                </tr>
+                <tr>
+                  <td>Candidate router</td>
+                  <td>backend/routers/candidates.py</td>
+                  <td>Candidate profile CRUD endpoints.</td>
+                </tr>
+                <tr>
+                  <td>Recruiter router</td>
+                  <td>backend/routers/recruiters.py</td>
+                  <td>Recruiter profile CRUD and recruiter admin endpoints.</td>
+                </tr>
+                <tr>
+                  <td>User router</td>
+                  <td>backend/routers/users.py</td>
+                  <td>Current user profile endpoints.</td>
+                </tr>
+                <tr>
+                  <td>Auth router</td>
+                  <td>backend/routers/auth.py</td>
+                  <td>Register, login, and OAuth endpoints.</td>
+                </tr>
+                <tr>
+                  <td>Dashboard router</td>
+                  <td>backend/routers/dashboard.py</td>
+                  <td>Jobs, ATS, applications, workflow, interviews, analytics, uploads.</td>
+                </tr>
+                <tr>
+                  <td>Resume AI</td>
+                  <td>backend/resume_ai.py</td>
+                  <td>Resume text extraction and ATS scoring.</td>
+                </tr>
+                <tr>
+                  <td>Assessment AI</td>
+                  <td>backend/assessment_ai.py</td>
+                  <td>Gemini question generation, ElevenLabs TTS, interview report analysis.</td>
+                </tr>
+                <tr>
+                  <td>Workflow engine</td>
+                  <td>backend/workflow_utils.py</td>
+                  <td>Assessment configuration, orchestration, scoring, serialization.</td>
+                </tr>
+                <tr>
+                  <td>Health and init</td>
+                  <td>backend/health.py, backend/init_db.py</td>
+                  <td>Health/status support and DB bootstrap helpers.</td>
+                </tr>
+                <tr>
+                  <td>Backend container</td>
+                  <td>backend/Dockerfile</td>
+                  <td>Railway backend container build.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <p class="section-kicker">Runtime stores</p>
+              <h2>Data stores and live assets</h2>
+            </div>
+            <p>These are the places where the application writes data during the hiring flow.</p>
+          </div>
+
+          <div class="grid-2">
+            <article class="card">
+              <h3>Database tables</h3>
+              <ul class="bullet-list" style="margin-top: 12px;">
+                <li>Users for authentication and roles.</li>
+                <li>Candidate profiles and recruiter profiles.</li>
+                <li>Job postings and job applications.</li>
+                <li>Interview sessions and scoring data.</li>
+                <li>Saved jobs and analytics snapshots.</li>
+              </ul>
+            </article>
+
+            <article class="card">
+              <h3>Upload locations</h3>
+              <ul class="bullet-list" style="margin-top: 12px;">
+                <li>Resumes are written to <code>uploads/resumes</code>.</li>
+                <li>Interview recordings are written to <code>uploads/interviews/recordings</code>.</li>
+                <li>Interview snapshots are written to <code>uploads/interviews/snapshots</code>.</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <p class="section-kicker">Current implementation</p>
+              <h2>What is done right now</h2>
+            </div>
+            <p>These items are already present in the current codebase and live app.</p>
+          </div>
+
+          <div class="grid-3">
+            <article class="card">
+              <span class="status-pill done">Candidate</span>
+              <ul class="bullet-list" style="margin-top: 12px;">
+                <li>Profile creation and updates.</li>
+                <li>Resume upload and ATS scanning.</li>
+                <li>Job browsing, saving, applying, and workflow tracking.</li>
+                <li>Interview flow with camera, transcript typing, and report output.</li>
+              </ul>
+            </article>
+            <article class="card">
+              <span class="status-pill done">Recruiter</span>
+              <ul class="bullet-list" style="margin-top: 12px;">
+                <li>Job creation and editing.</li>
+                <li>Aptitude, technical, and coding rounds can be required or optional.</li>
+                <li>Interview scheduling and candidate review.</li>
+                <li>Analytics and recruiter access management.</li>
+              </ul>
+            </article>
+            <article class="card">
+              <span class="status-pill done">AI stack</span>
+              <ul class="bullet-list" style="margin-top: 12px;">
+                <li>Gemini generates aptitude MCQs, technical MCQs, coding prompts, and interview questions.</li>
+                <li>ElevenLabs speaks the interview prompt aloud.</li>
+                <li>Interview report analysis is produced at the end of the workflow.</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <p class="section-kicker">Current gaps</p>
+              <h2>What is still pending or partially implemented</h2>
+            </div>
+            <p>These are the outstanding items visible in the current build.</p>
+          </div>
+
+          <div class="grid-3">
+            <article class="card">
+              <span class="status-pill partial">Partial</span>
+              <ul class="bullet-list" style="margin-top: 12px;">
+                <li>OAuth login exists on the backend, but the login screens do not expose Google/GitHub/LinkedIn buttons yet.</li>
+                <li>The "Forgot Password" UI is present, but a real reset flow is not implemented.</li>
+                <li>Candidate and recruiter support actions still show a coming-soon placeholder.</li>
+              </ul>
+            </article>
+            <article class="card">
+              <span class="status-pill partial">Partial</span>
+              <ul class="bullet-list" style="margin-top: 12px;">
+                <li>Recruiter AI optimization currently shows suggestion text, not a one-click AI rewrite workflow.</li>
+                <li>The proctoring layer is browser-based, so it is not yet a fully locked kiosk-style exam shell.</li>
+                <li>There is no built-in export button for the final interview report in the current UI.</li>
+              </ul>
+            </article>
+            <article class="card">
+              <span class="status-pill pending">Pending</span>
+              <ul class="bullet-list" style="margin-top: 12px;">
+                <li>Email or SMS notification workflows are not shown in the current code.</li>
+                <li>Calendar integrations are not visible yet.</li>
+                <li>More advanced support tooling and analytics export would still improve the product.</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <p class="section-kicker">Status board</p>
+              <h2>Implementation health snapshot</h2>
+            </div>
+            <p>These bars summarize the current maturity of the major product surfaces.</p>
+          </div>
+
+          <div class="grid-2">
+            <article class="chart-card">
+              <div class="meter-wrap">
+                <div class="meter-label"><span>Candidate portal coverage</span><span>92%</span></div>
+                <div class="meter"><span data-meter="92"></span></div>
+                <div class="meter-label"><span>Recruiter portal coverage</span><span>89%</span></div>
+                <div class="meter"><span data-meter="89"></span></div>
+                <div class="meter-label"><span>AI workflow coverage</span><span>86%</span></div>
+                <div class="meter"><span data-meter="86"></span></div>
+                <div class="meter-label"><span>Deployment readiness</span><span>90%</span></div>
+                <div class="meter"><span data-meter="90"></span></div>
+              </div>
+            </article>
+
+            <article class="card light">
+              <span class="status-pill done">Interpretation</span>
+              <h3 class="step-title">How to read the board</h3>
+              <p class="step-copy">
+                This is not a promise of maturity across every subsystem. It is a visual summary of the current build surface area:
+                candidate flow is the most visible, recruiter flow is almost complete, the AI layer is wired in, and a few support
+                features remain unfinished.
+              </p>
+              <div class="callout" style="margin-top: 16px;">
+                <strong>Note:</strong> The guide is intentionally conservative and describes the code that exists now, not a wishlist.
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <footer class="page-footer">
+          <div>System guide for Invenia AI.</div>
+          <div>Use this page as the reference document for demos and handoff discussions.</div>
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>

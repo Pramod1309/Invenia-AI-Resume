@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import inveniaLogo from '../assets/Invenia India Logo.png';
 
 const SplashScreen = ({ onComplete }) => {
   const [isVisible, setIsVisible] = useState(true);
@@ -8,24 +9,30 @@ const SplashScreen = ({ onComplete }) => {
       setIsVisible(false);
       setTimeout(() => {
         onComplete();
-      }, 500);
-    }, 3000);
+      }, 350);
+    }, 2600);
 
     return () => clearTimeout(timer);
   }, [onComplete]);
 
   return (
     <div
-      className={`fixed inset-0 bg-navy-blue flex items-center justify-center z-50 transition-opacity duration-500 ${
+      className={`fixed inset-0 bg-navy-blue flex items-center justify-center z-50 transition-opacity duration-300 ${
         isVisible ? 'opacity-100' : 'opacity-0'
       }`}
     >
       <div className="text-center">
         <div className="animate-fade-in">
+          <img
+            src={inveniaLogo}
+            alt="Invenia India Logo"
+            className="w-32 h-32 md:w-48 md:h-48 mx-auto mb-6 animate-fade-in object-contain"
+            style={{ animationDelay: '200ms' }}
+          />
           <h1 className="text-6xl md:text-8xl font-bold text-white mb-4 animate-pulse-slow">
             Invenia
           </h1>
-          <h2 className="text-4xl md:text-6xl font-light text-white animate-slide-up">
+          <h2 className="text-4xl md:text-6xl font-bold text-white animate-slide-up">
             AI
           </h2>
         </div>

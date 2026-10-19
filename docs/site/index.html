@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Invenia AI Docs Studio</title>
+    <link rel="stylesheet" href="./assets/styles.css" />
+    <script defer src="./assets/app.js"></script>
+  </head>
+  <body data-page="index">
+    <div class="docs-shell">
+      <header class="topbar">
+        <div class="brand">
+          <div class="brand-mark">IA</div>
+          <div class="brand-copy">
+            <strong>Invenia AI Docs Studio</strong>
+            <span>PDF-ready manuals, diagrams, and system guide</span>
+          </div>
+        </div>
+        <nav class="nav" aria-label="Documentation navigation">
+          <a href="./index.html">Overview</a>
+          <a href="./candidate-manual.html">Candidate Manual</a>
+          <a href="./recruiter-manual.html">Recruiter Manual</a>
+          <a href="./diagrams.html">Diagrams</a>
+          <a href="./system-guide.html">System Guide</a>
+        </nav>
+        <div class="toolbar">
+          <a class="btn btn-secondary doc-link" data-open-live href="#">Open Live App</a>
+          <button class="btn btn-primary" data-print>Download PDF</button>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero">
+          <div class="hero-grid">
+            <div>
+              <span class="eyebrow">Documentation center</span>
+              <h1>Everything the team needs, from login to final report.</h1>
+              <p>
+                This studio turns the current Invenia AI product into a polished set of printable manuals. Each page is built with
+                HTML, CSS, and JavaScript, and the screenshots come from the live Railway app connected to the production workflow.
+              </p>
+              <div class="tag-row">
+                <span class="tag">Candidate portal manual</span>
+                <span class="tag">Recruiter portal manual</span>
+                <span class="tag">Visual diagrams</span>
+                <span class="tag">Creative system guide</span>
+              </div>
+              <div class="hero-quote">
+                <strong>Live app:</strong>
+                <a class="doc-link" href="https://frontend-production-a792.up.railway.app/" target="_blank" rel="noreferrer">
+                  https://frontend-production-a792.up.railway.app/
+                </a>
+                <div class="mini-note" style="margin-top: 10px;">
+                  The manuals are designed for print, so you can open any page and use the browser's Save as PDF action.
+                </div>
+              </div>
+            </div>
+
+            <div class="hero-panel">
+              <div class="stat-grid">
+                <article class="stat-card">
+                  <div class="kicker">Manuals</div>
+                  <div class="value" data-count="2">2</div>
+                  <div class="sub">Separate guides for candidates and recruiters.</div>
+                </article>
+                <article class="stat-card">
+                  <div class="kicker">Diagrams</div>
+                  <div class="value" data-count="3">3</div>
+                  <div class="sub">Architecture, use case, and data flow.</div>
+                </article>
+                <article class="stat-card">
+                  <div class="kicker">Modules</div>
+                  <div class="value" data-count="13">13</div>
+                  <div class="sub">Frontend, backend, AI, storage, and deployment.</div>
+                </article>
+                <article class="stat-card">
+                  <div class="kicker">AI routes</div>
+                  <div class="value" data-count="4">4</div>
+                  <div class="sub">Resume scan, MCQs, interview prompts, report.</div>
+                </article>
+              </div>
+
+              <div class="panel">
+                <p class="section-kicker">Current content snapshot</p>
+                <p style="margin-top: 8px; font-size: 1rem; color: #fff; line-height: 1.7;">
+                  The docs are anchored to the current build state, including candidate ATS scoring, recruiter job setup, optional test
+                  toggles, and the 3-question AI interview flow.
+                </p>
+                <div class="label-row">
+                  <span class="label"><strong>PDF</strong> friendly print layout</span>
+                  <span class="label"><strong>HTML</strong> + CSS + JS only</span>
+                  <span class="label"><strong>Live</strong> app screenshots</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <p class="section-kicker">Quick navigation</p>
+              <h2>Choose the page you want to read or export</h2>
+            </div>
+            <p>Each page opens in a clean print-friendly layout with rich visuals, charts, and screenshots.</p>
+          </div>
+
+          <div class="grid-2">
+            <a class="card light" href="./candidate-manual.html">
+              <span class="step-chip">C1</span>
+              <h3 class="step-title">Candidate Manual</h3>
+              <p class="step-copy">
+                Start from the role selector, complete the profile, upload the resume, run ATS scan, apply to jobs, and finish the
+                interview journey.
+              </p>
+              <ul class="bullet-list" style="margin-top: 16px;">
+                <li>Uses actual live app screenshots from the candidate journey.</li>
+                <li>Shows ATS score, application workflow, and the interview/report step.</li>
+                <li>Suitable for onboarding or candidate support docs.</li>
+              </ul>
+            </a>
+
+            <a class="card light" href="./recruiter-manual.html">
+              <span class="step-chip" style="background: linear-gradient(135deg, var(--violet), var(--rose));">R1</span>
+              <h3 class="step-title">Recruiter Manual</h3>
+              <p class="step-copy">
+                Learn how to create jobs, toggle screening rounds, review candidates, schedule interviews, and inspect AI-generated
+                reports.
+              </p>
+              <ul class="bullet-list" style="margin-top: 16px;">
+                <li>Highlights compulsory and optional assessment controls.</li>
+                <li>Includes the recruiter dashboard, create-job modal, and candidate report view.</li>
+                <li>Helpful for admin, hiring, and internal training.</li>
+              </ul>
+            </a>
+
+            <a class="card light" href="./diagrams.html">
+              <span class="step-chip" style="background: linear-gradient(135deg, var(--green), var(--cyan));">D1</span>
+              <h3 class="step-title">Diagrams Page</h3>
+              <p class="step-copy">
+                See the architecture, use-case, and data-flow views laid out in a visual board style with colorful node cards and
+                connector lines.
+              </p>
+              <ul class="bullet-list" style="margin-top: 16px;">
+                <li>Built to feel like a presentation board or whiteboard export.</li>
+                <li>Perfect for explaining the stack to stakeholders or investors.</li>
+                <li>Prints cleanly into a PDF page set.</li>
+              </ul>
+            </a>
+
+            <a class="card light" href="./system-guide.html">
+              <span class="step-chip" style="background: linear-gradient(135deg, #f59e0b, #ef4444);">G1</span>
+              <h3 class="step-title">System Guide</h3>
+              <p class="step-copy">
+                A richer version of the markdown guide, with charts, module tables, status maps, and a clear done-versus-pending
+                breakdown.
+              </p>
+              <ul class="bullet-list" style="margin-top: 16px;">
+                <li>Tracks current implementation, not future roadmap guesses.</li>
+                <li>Balanced for quick reading and formal documentation exports.</li>
+                <li>Good fit for product, engineering, and handoff reviews.</li>
+              </ul>
+            </a>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <p class="section-kicker">Build at a glance</p>
+              <h2>What this docs set currently covers</h2>
+            </div>
+            <p>It mirrors the implemented product and the live data flow between candidate, recruiter, and AI services.</p>
+          </div>
+
+          <div class="grid-3">
+            <article class="chart-card">
+              <div class="chart-row">
+                <div class="donut" data-donut="92" data-label="Candidate\nFlow" data-accent="var(--blue)"></div>
+                <div class="meter-wrap">
+                  <div class="meter-label"><span>Profile, ATS, jobs, and interview room</span><span>92%</span></div>
+                  <div class="meter"><span data-meter="92"></span></div>
+                  <p class="mini-note">Most of the candidate portal is documented with live screenshots and step-by-step guidance.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="chart-card">
+              <div class="chart-row">
+                <div class="donut" data-donut="89" data-label="Recruiter\nFlow" data-accent="var(--violet)"></div>
+                <div class="meter-wrap">
+                  <div class="meter-label"><span>Job creation, candidate review, and reports</span><span>89%</span></div>
+                  <div class="meter"><span data-meter="89"></span></div>
+                  <p class="mini-note">The recruiter manual highlights configurable screening rules and the AI report review flow.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="chart-card">
+              <div class="chart-row">
+                <div class="donut" data-donut="95" data-label="Guide\nQuality" data-accent="var(--green)"></div>
+                <div class="meter-wrap">
+                  <div class="meter-label"><span>Tables, charts, diagrams, and print support</span><span>95%</span></div>
+                  <div class="meter"><span data-meter="95"></span></div>
+                  <p class="mini-note">The system guide is intentionally dense, visual, and export-friendly for formal sharing.</p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <footer class="page-footer">
+          <div>Built for Invenia AI documentation and PDF export.</div>
+          <div>Open any page, then use <strong>Download PDF</strong> or the browser print dialog.</div>
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>
