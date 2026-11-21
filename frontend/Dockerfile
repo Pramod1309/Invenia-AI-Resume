@@ -8,7 +8,7 @@ RUN npm ci
 COPY . .
 
 # Optional override at build-time. Defaults to the production Railway API domain.
-ARG VITE_BACKEND_URL=https://api.inveniatechlabs.in
+ARG VITE_BACKEND_URL=
 ENV VITE_BACKEND_URL=${VITE_BACKEND_URL}
 ARG VITE_GOOGLE_CLIENT_ID=130212797010-1537g33b5i3qjb3jru5v9c40qhod083c.apps.googleusercontent.com
 ENV VITE_GOOGLE_CLIENT_ID=${VITE_GOOGLE_CLIENT_ID}

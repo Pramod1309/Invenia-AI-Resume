@@ -1,0 +1,34 @@
+services:
+  - type: web
+    name: invenia-backend
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: invenia-db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: SUPER_RECRUITER_EMAIL
+        value: pdjadhav13091876@gmail.com
+      - key: CORS_ORIGINS
+        value: https://invenia-frontend.onrender.com
+
+  - type: web
+    name: invenia-frontend
+    runtime: docker
+    dockerfilePath: ./frontend/Dockerfile
+    dockerContext: ./frontend
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: BACKEND_UPSTREAM
+        value: https://invenia-backend.onrender.com
+
+databases:
+  - name: invenia-db
+    plan: free

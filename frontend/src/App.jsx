@@ -4,6 +4,7 @@ import SplashScreen from './components/SplashScreen';
 import { GlobalNetworkIndicator, PageSkeleton } from './components/UXKit';
 import CandidateLogin from './pages/CandidateLogin';
 import RecruiterLogin from './pages/RecruiterLogin';
+import PublicWebsite from './pages/PublicWebsite';
 
 const CandidateSignUp = lazy(() => import('./pages/CandidateSignUp'));
 const CandidateDashboard = lazy(() => import('./pages/CandidateDashboard'));
@@ -14,25 +15,24 @@ const RecruiterDashboard = lazy(() => import('./pages/RecruiterDashboard'));
 const RecruiterJobDetailsPage = lazy(() => import('./pages/RecruiterJobDetailsPage'));
 const RecruiterJobFormPage = lazy(() => import('./pages/RecruiterJobFormPage'));
 
-function App() {
+function SplashGate({ children }) {
   const [showSplash, setShowSplash] = useState(true);
+  return showSplash
+    ? <SplashScreen onComplete={() => setShowSplash(false)} />
+    : children;
+}
 
-  const handleSplashComplete = () => {
-    setShowSplash(false);
-  };
-
+function App() {
   return (
     <Router>
       <div className="App">
         <GlobalNetworkIndicator />
-        {showSplash ? (
-          <SplashScreen onComplete={handleSplashComplete} />
-        ) : (
-          <Suspense fallback={<PageSkeleton />}><Routes>
-            <Route path="/" element={<CandidateLogin />} />
+        <Suspense fallback={<PageSkeleton />}>
+          <Routes>
+            <Route path="/" element={<PublicWebsite />} />
             <Route path="/login" element={<Navigate to="/login/candidate" replace />} />
-            <Route path="/login/candidate" element={<CandidateLogin />} />
-            <Route path="/login/recruiter" element={<RecruiterLogin />} />
+            <Route path="/login/candidate" element={<SplashGate><CandidateLogin /></SplashGate>} />
+            <Route path="/login/recruiter" element={<SplashGate><RecruiterLogin /></SplashGate>} />
             <Route path="/signup/candidate" element={<CandidateSignUp />} />
             <Route path="/dashboard/candidate" element={<CandidateDashboard />} />
             <Route path="/dashboard/candidate/jobs/:jobId" element={<CandidateJobDetailsPage />} />
@@ -42,8 +42,8 @@ function App() {
             <Route path="/dashboard/recruiter/jobs/new" element={<RecruiterJobFormPage />} />
             <Route path="/dashboard/recruiter/jobs/:jobId" element={<RecruiterJobDetailsPage />} />
             <Route path="/dashboard/recruiter/jobs/:jobId/edit" element={<RecruiterJobFormPage />} />
-          </Routes></Suspense>
-        )}
+          </Routes>
+        </Suspense>
       </div>
     </Router>
   );
