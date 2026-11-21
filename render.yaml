@@ -16,7 +16,7 @@ services:
       - key: SUPER_RECRUITER_EMAIL
         value: pdjadhav13091876@gmail.com
       - key: CORS_ORIGINS
-        value: https://invenia-frontend.onrender.com
+        value: https://invenia-frontend-0gpr.onrender.com
 
   - type: web
     name: invenia-frontend
@@ -27,7 +27,7 @@ services:
     healthCheckPath: /health
     envVars:
       - key: BACKEND_UPSTREAM
-        value: https://invenia-backend.onrender.com
+        value: https://invenia-backend-kpr4.onrender.com
 
 databases:
   - name: invenia-db
